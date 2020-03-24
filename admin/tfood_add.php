@@ -14,8 +14,7 @@ if(isset($_GET['i']) && isset($_GET['ac']) && isset($_GET['ob'])) {
   $respOb = "";
 }
 
-// Sets
-$pageName = "promotions";
+$pageName = "tfood";
 ?>
 
 <!DOCTYPE html>
@@ -43,8 +42,8 @@ $pageName = "promotions";
     <!-- TITLE -->
     <div class="row mb-2">
       <div class="col-md-12">
-        <h2>Novo Cardápio</h2>  
-        <small>Publique seus cardápios que você deseja expor aos seus clientes.</small>
+        <h2>Novo Tipo de alimento</h2>  
+        <small>Publique os tipos de alimentos que você deseja expor aos seus clientes.</small>
       </div>
     </div>
     <!-- END - TITLE -->
@@ -54,67 +53,39 @@ $pageName = "promotions";
       <div class="col-md-12">
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="<?=$pageName?>.php">Cardápio</a></li>
+            <li class="breadcrumb-item"><a href="<?=$pageName?>.php">Tipo de alimentos</a></li>
             <li class="breadcrumb-item active" aria-current="page">Novo</li>
           </ol>
         </nav>
       </div>
     </div>
-
     <hr>
     <!-- END - DIRECTORY -->
     
     <!-- FORM ADD -->
-    <form class="row form-validate" action="actions/<?=$pageName?>.php" method="POST" enctype="multipart/form-data">
+    <form id="form-depoimentos" class="row form-validate" action="actions/<?=$pageName?>.php" method="post" enctype="multipart/form-data">
       <input type="hidden" name="action" value="add">
-      <div class="form-group col-md-12">
-        <label for="name">Nome da Promo*</label>
-        <input type="text" class="form-control" id="name" name="name">
-      </div>
+
+      <div class="w-100"></div>
 
       <div class="form-group col-md-12">
-        <label for="text">Ingredientes (opcional)</label>
-        <textarea id="summernote" class="form-control" name="text" width='200px;'></textarea>
-      </div>  
+        <label for="name">Tipo do alimento*</label>
+        <input type="text" class="form-control" id="name" name="title">
+      </div>
+
+      <ul class="form-group col-md-12 container-error"></ul>
 
       <div class="col-md-12">
         <hr>
       </div>
 
-      <div class="form-group col-md-6">
-        <label for="name">Preço*</label>
-        <input type="text" class="form-control" id="value" name="value">
-      </div>
-
-      <div class="form-group col-md-3">
-        <label for="name">Data de publicação *</label>
-        <div class="w-100"></div>
-        <input type="date" name="dataPublicao" min="2020-01-01">
-      </div>
-      
-      <div class="form-group col-md-3">
-        <label for="name">Data de encerramento *</label>
-        <div class="w-100"></div>
-        <input type="date" name="dataFinalPublicacao" min="2020-01-01">
-      </div>
-
-      <div class="w-100"></div>
-
-      <div class="form-group col-md-6">
-        <label for="file">Imagem do produto*</label>
-        <input type="file" class="form-control" id="file" name="file" accept="image/*">
-        <small>(Largura Max.: 5000px / Altura Max.: 3000px)</small>
-      </div>
-
-      
       <div class="form-group col-md-12">
-        <button type="submit" class="btn btn-primary">Salvar</button>
+        <button type="submit" class="btn btn-primary">Publicar</button>
       </div>
+    </form>
     <!-- END - FORM ADD -->
 
     </div>
-  </div>
-  </form>
 
   <!-- NOTIFICATION -->
   <span class="resp-notification notification-validation"><?= $resp ?></span>

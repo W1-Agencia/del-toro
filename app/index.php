@@ -1,4 +1,12 @@
-﻿<!doctype html>
+﻿<?php 
+    require_once "connection/connection.php";
+    require_once "connection/close_connection.php";
+    require_once "require/functions/select.php";
+    $items = select("promotions","*","id");
+    $configuration = select("configuration","*","id");
+
+?>
+<!doctype html>
 <html>
 <head>
   <meta charset="UTF-8">
@@ -76,6 +84,8 @@
                 <div class="col-md">
 
                     <div class="owl-carousel owl-theme">
+                        <?php for($i=0;$i<count($items);$i++) : ?>
+                            <?php if($items[$i]['date_end'] >= date('Y-m-d') && $items[$i]['date_init'] <= date('Y-m-d')) :?>
                         <div class="item">
                             <!-- item de slide -->
                             <div class="row">
@@ -87,14 +97,16 @@
                                 </div><!-- col-md -->
                                 <div class="col-md-1"></div>
                                 <div class="col-md-5 text-left mt-5">
-                                    <h2 class = "negrito"><?=$items[$i]['name_prod']?>l</h2>
+                                    <h2 class = "negrito"><?=$items[$i]['name_prod']?></h2>
                                     <h5 class = "cor-cinza"><?=$items[$i]['descriptions_prod']?></h5>
                                     <p class = "fonte-secundaria cor-vermelho fonte-30 mt-4 mb-4"> <?= number_format($items[$i]['value_prod'], 2, ',', '.') ?></p>
-                                    <p><a href="https://api.whatsapp.com/send?phone=5567999448730&text=Oi! Gostaria de fazer um pedido do item da promoção: <?=$items[$i]['name_prod']?> por <?= number_format($items[$i]['value_prod'], 2, ',', '.')?> que encontrei no site da Del'Toro." target = "_blank" class = "botao-terceiro">PEDIR COMBO</a></p>
+                                    <p><a href="https://api.whatsapp.com/send?phone=5567999448730&text=Oi! Gostaria de fazer um pedido do item da promoção: <?=$items[$i]['name_prod']?> por <?= number_format($items[$i]['value_prod'], 2, ',', '.')?> que encontrei no site da Del'Toro." id="combo" target = "_blank" class = "botao-terceiro">PEDIR COMBO</a></p>
                                 </div><!-- col-md  -->
                             </div><!-- row -->
                             <!-- item de slide fim -->
                         </div><!-- item -->
+                        <?php endif;?>
+                        <?php endfor;?>
                     </div><!-- owl-carousel -->
                     <div class="owl-theme"><div class="owl-controls"><div class="custom-nav owl-nav"></div></div>
                 </div>
@@ -287,5 +299,6 @@
   <script src="<?= BASE_JS ?>popper.min.js"></script>
   <script src="<?= BASE_JS ?>bootstrap.min.js"></script>
   <script src="<?= BASE_JS ?>estilo.js"></script>
+
 </body>
 </html>

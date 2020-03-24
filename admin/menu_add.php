@@ -2,7 +2,7 @@
 session_start();
 
 if(!isset($_SESSION['user']))
-  header("Location:index.php");
+  header("Location:login");
 
 if(isset($_GET['i']) && isset($_GET['ac']) && isset($_GET['ob'])) {
   $resp = $_GET['i'];

@@ -1,12 +1,12 @@
 <?php 
 session_start();
 
-require_once '../connection/connection.php';
-require_once '../connection/close_connection.php';
+require_once './connection/connection.php';
+require_once './connection/close_connection.php';
 require_once 'require/functions/select.php';
 
 if(!isset($_SESSION['user'])) 
-  header("Location:index.php");
+  header("Location:login");
 
 if(isset($_GET['i']) && isset($_GET['ac']) && isset($_GET['ob'])) {
   $resp = $_GET['i'];
@@ -84,7 +84,7 @@ if($promotions) {
     <!-- END - DIRECTORY -->
 
     <!-- FORM EDIT -->
-    <form id="form-quartos-edit" action="actions/<?=$pageName?>.php" class="row form-validate" method="post" enctype="multipart/form-data">
+    <form id="form-depoimentos-edit" action="actions/<?=$pageName?>.php" class="row form-validate" method="post" enctype="multipart/form-data">
       <input type="hidden" name="action" value="edit">
       <input type="hidden" name="id" value="<?= $id ?> ">
 
@@ -142,7 +142,7 @@ if($promotions) {
 
     <div class="form-group col-md-3">
         <label for="position">Ordem de apresentação*</label>
-        <input type="text" class="form-control" name="ordenation" value="<?= $promotions[0]['ordenation'] ?>">
+        <input type="text" class="form-control" name="ordenation" value="<?= number_format($promotions[0]['ordenation'],2,',','.') ?>">
       </div> 
 
       <ul class="form-group col-md-12 container-error"></ul>   

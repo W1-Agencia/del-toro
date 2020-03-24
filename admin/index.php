@@ -14,16 +14,16 @@ if(isset($_SESSION['user'])) {
   <title>Login administrativo</title>
   <link rel="icon" href="favicon.png">
   <link rel="stylesheet" href="require/css/bootstrap.min.css">
-  <link rel="stylesheet" type="text/css" href="require/css/style.css">
+  <link rel="stylesheet" type="text/css" href="./require/css/style.css">
   
 </head>
 <body>
   <div class="content-page">
-    <div class="container" >
+    <div class="content-page" >
       <div class="row">
         <form class="justify-content-center form-login" action="actions/login.php" method="POST">
           <div class="logo-admin">
-            <img class="img-fluid img-logo" src="require/img/w1.jpg" width="200" height="200">
+            <img class="img-fluid" src="require/img/w1.png">
           </div>
           <div class="form-group">
             <label for="text">Usuário</label>

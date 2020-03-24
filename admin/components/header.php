@@ -2,7 +2,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-admin">
   <a class="navbar-brand" href="admin.php">
-    <img class="img-fluid img-logo-admin" src="require/img/w1.jpg" width="70px" height="70px">
+    <img class="img-fluid img-logo-admin" src="require/img/w1.png" width="70px" height="70px">
   </a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"><img src="require/img/menu.png" width="50px" heigth="30px"></span>
@@ -10,9 +10,11 @@
 
   <div class="collapse navbar-collapse navbar-content-item" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item"><a class="nav-link" href="admin.php">Inicial</a></li>
-      <li class="nav-item"><a class="nav-link" href="menu.php">Cardápio</a></li>
-      <li class="nav-item"><a class="nav-link" href="promotions.php">Promoções</a></li>
+      <li class="nav-item"><a class="nav-link" href="./">Inicial</a></li>
+      <li class="nav-item"><a class="nav-link" href="slides">Slides</a></li>
+      <li class="nav-item"><a class="nav-link" href="tipo-alimento">Tipo de alimentos</a></li>
+      <li class="nav-item"><a class="nav-link" href="cardapios">Cardápios</a></li>
+      <li class="nav-item"><a class="nav-link" href="promocoes">Promoções</a></li>
     </ul>
 
     <div class="dropdown external-element">

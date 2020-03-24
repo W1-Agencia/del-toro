@@ -1,1 +1,14 @@
-RewriteEngine off
+
+
+AddType application/x-font-ttf           ttc ttf
+AddType application/x-font-otf           otf
+AddType application/font-woff            woff
+AddType application/font-woff2           woff2
+AddType application/vnd.ms-fontobject    eot
+
+<FilesMatch ".(eot|ttf|otf|woff|woff2)">
+  Header set Access-Control-Allow-Origin "*"
+</FilesMatch>
+
+RewriteEngine on
+RewriteRule !\.(mp4|webm|png|jpg|jpeg|gif|swf|js|css|ico|txt|php|JPG|eot|otf|woff2|woff|ttf|svg|html|xml|htm|z|pdf|doc|docx|csv|map)$ ../main_admin.php 

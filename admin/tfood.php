@@ -17,7 +17,9 @@ if(isset($_GET['i']) && isset($_GET['ac']) && isset($_GET['ob'])) {
   $respAction = "";
   $respOb = "";
 }
-$pageName = "promotions";
+
+// SETS
+$pageName = "tfood";
 
 $rows = 10;
 
@@ -26,8 +28,9 @@ $page = isset($_GET['page']) ? $_GET['page'] : "";
 $start_page = $pageCurrent - 1;
 $start_page = $start_page * $rows;
 
-$items = select("promotions", "*", "id", "ORDER BY ordenation ASC", "LIMIT $start_page, $rows");
-$itemsAll = select("promotions", "*", "id", "ORDER BY ordenation ASC");
+$items = select("food", "*", "id", "ORDER BY ordenation ASC", "LIMIT $start_page, $rows");
+$itemsAll = select("food", "*", "id", "ORDER BY ordenation ASC");
+
 $countItems = ($itemsAll ? count($itemsAll) : "0");
 $countPage = $countItems / $rows;
 ?>
@@ -44,7 +47,7 @@ $countPage = $countItems / $rows;
   <link rel="icon" href="favicon.png">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
-  <link rel="stylesheet" href="./require/css/style.css">
+  <link rel="stylesheet" href="require/css/style.css">
 </head>
 
 <body>
@@ -57,16 +60,18 @@ $countPage = $countItems / $rows;
     <!-- TITLE -->
     <div class="row">
       <div class="col-md-12">
-        <h2>Promoções</h2>
-        <small>Publique suas promoções aqui.</small>
+        <h2>Tipo de alimentos</h2>
+        <small>Publique os tipos de comida que deseja seus clientes vejam.</small>
       </div>
     </div>
     <!-- END - TITLE -->
+
     <hr>
+    
     <!-- BTN ADD -->
     <div class="row content-link-add-admin">
       <div class="col-md-12">
-        <a href="<?=$pageName?>_add.php" class="btn btn-success"><i class="fas fa-plus"></i> Nova Promoção</a>
+        <a href="<?=$pageName?>_add.php" class="btn btn-success"><i class="fas fa-plus"></i> Novo Tipo de alimento</a>
       </div>
     </div>
     <!-- END - BTN ADD -->
@@ -76,15 +81,14 @@ $countPage = $countItems / $rows;
       <div class="col-md-12">
         <?php if($items) : ?>
         <table class="table table-condensed table-striped table-hover table-admin">
-          <caption>Listando <?= count($items) ?> Promoções(s) de <?=$countItems?>.</caption>
+
+          <caption>Listando <?= count($items) ?> Tipo de alimento(s) de <?=$countItems?>.</caption>
+
           <thead>
             <tr>
               <th>Ordem</th>
-              <th>Promoção do dia</th>
-              <th>Dia que será publicada</th>
-              <th>Dia que será apagada</th>
-              <th>Foto</th>
-              <th>Valor</th>
+              <th>Titulo</th>
+              <th>Texto</th>
               <th class="col-actions">Ações</th>
             </tr>
           </thead>
@@ -94,18 +98,12 @@ $countPage = $countItems / $rows;
             <tr id="<?= $items[$i]['id'] ?>">
               <td><?= $items[$i]['ordenation'] ?></td>
 
-              <td><?= $items[$i]['name_prod'] ?></td>
-                
-              <td><?= date('d/m/Y', strtotime($items[$i]['date_init']))?></td>
+              <td><?= $items[$i]['title'] ?></td>
 
-              <td><?= date('d/m/Y', strtotime($items[$i]['date_end']))?></td>
-
-              <td><img class="img-fluid img-table" src="require/img/promotions/<?=$items[$i]['namedir']?>" /></td>
-
-              <td><?= number_format($items[$i]['value_prod'],2,',','.') ?> R$</td>
+              <td><?= $items[$i]['text'] ?></td>
 
             <td class="col-actions">
-                <a class="link-action-edit" href="promocoes-editar/editar/<?= $items[$i]['id'] ?>" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="editar">
+                <a class="link-action-edit" href="<?=$pageName?>-edit/id=<?= $items[$i]['id'] ?>" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="editar">
                   <i class="far fa-edit"></i>
                 </a>
                 <span id="popover" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="excluir">
@@ -139,8 +137,8 @@ $countPage = $countItems / $rows;
 
         <?php else : ?>
         <h4 class="table-empty">
-          Nenhum cardápio publicado no site. 
-          <a href="<?=$pageName?>_add.php">Adicionar um novo cardápio.</a>
+          Nenhum tipo de alimento publicado no site. 
+          <a href="<?=$pageName?>_add.php">Adicionar um novo Tipo de alimento.</a>
         </h4>
         <?php endif ?>
 
@@ -155,14 +153,14 @@ $countPage = $countItems / $rows;
       <div class="modal-content">
 
         <div class="modal-header">
-          <h5 class="modal-title" id="smallmodalLabel">Remover slide</h5>
+          <h5 class="modal-title" id="smallmodalLabel">Remover Tipo de alimento</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
           </button>
         </div>
 
         <div class="modal-body">
-          <p>Deseja realmente remover este <b>slide</b>?</p>
+          <p>Deseja realmente remover este <b>Tipo de alimento</b>?</p>
         </div>
 
         <form method="POST" action="actions/<?=$pageName?>.php" class="modal-footer form-remove">

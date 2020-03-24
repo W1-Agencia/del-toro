@@ -30,7 +30,7 @@ if(isset($_POST['user'])
     } elseif($return) {
 
       $_SESSION['user'] = $user;
-      header("Location:../admin.php");
+      header("Location:../");
       
     }
 

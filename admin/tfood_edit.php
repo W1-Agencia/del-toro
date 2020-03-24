@@ -19,18 +19,15 @@ if(isset($_GET['i']) && isset($_GET['ac']) && isset($_GET['ob'])) {
 }
 
 // Sets
-$pageName = "menu";
+$pageName = "food";
 
 $_GET['id'] ? 
-  $menu = select("menu", "*", "id=".$_GET['id']) :
-  header("Location:cardapios");
+  $slides = select("food", "*", "id=".$_GET['id']) :
+  header("Location:slides.php");
 
-if($menu) {
-  $id = $menu[0]['id'];
-  $name = $menu[0]['name_product'];
-  $text = $menu[0]['description_product'];
-  $value = number_format($menu[0]['value_product'],2,',','.');
-  $select = $menu[0]['id_product'];
+if($slides) {
+  $id = $slides[0]['id'];
+  $name = $slides[0]['title'];
 }
 
 ?>
@@ -47,7 +44,6 @@ if($menu) {
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.css" rel="stylesheet">  
-  <link rel="stylesheet" href="require/css/jquery.css">
   <link rel="stylesheet" href="require/css/style.css">
 </head>
 <body>
@@ -60,8 +56,8 @@ if($menu) {
     <!-- TITLE -->
     <div class="row mb-2">
       <div class="col-md-12">
-        <h3>Editar Cardápio</h3>
-        <small>Edite os cardápios que você publicou.</small>
+        <h3>Editar Tipo de alimento</h3>
+        <small>Edite os tipos de alimentos que você publicou.</small>
       </div>
     </div>
     <!-- END - TITLE -->
@@ -71,7 +67,7 @@ if($menu) {
       <div class="col-md-12">
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="<?=$pageName?>.php">Cardápio</a></li>
+            <li class="breadcrumb-item"><a href="<?=$pageName?>.php">Tipo de alimento</a></li>
             <li class="breadcrumb-item active" aria-current="page">Editar</li>
           </ol>
         </nav>
@@ -87,46 +83,14 @@ if($menu) {
       <input type="hidden" name="id" value="<?= $id ?> ">
 
       <div class="form-group col-md-4">
-        <label for="inputState">Selecione o tipo de alimento</label>
-          <select id="inputState" class="form-control" name='options'>
-            <option select>Opção</option>
-            <option value='1'>
-              Opção Vegetariana
-            </option>
-            <option value='2'>
-              Teste
-            </option>
-            <option value='3'>
-              Cerveja
-            </option>
-            <option value='4'>
-              Sorvete
-            </option>
-          </select>
-      </div>
-
-      <div class="form-group col-md-4">
-        <label for="name">Prato*</label>
+        <label for="name">Titulo*</label>
         <input type="text" class="form-control" id="name" name="title" value="<?= $name ?>">
       </div>
 
-      <div class="form-group col-md-12">
-        <label for="content">Texto*</label>
-        <textarea id="summernote" class="form-control" name="text"><?= $text ?></textarea>
-      </div>
+      <div class="w-100"></div>
 
-      <div class="form-group col-md-3">
-        <label for="name">Preço*</label>
-        <input type="text" class="form-control" id="value" name="value" value="<?=$value?>">
-      </div>
-      
+
       <ul class="form-group col-md-12 container-error"></ul>   
-
-      <div class="form-group col-md-3">
-        <label for="position">Ordem de apresentação*</label>
-        <input type="text" class="form-control" name="ordenation" value="<?= $menu[0]['ordenation'] ?>">
-      </div> 
-
 
       <div class="col-md-12">
         <hr>

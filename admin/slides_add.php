@@ -53,7 +53,7 @@ $pageName = "slides";
       <div class="col-md-12">
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="<?=$pageName?>.php">Slides</a></li>
+            <li class="breadcrumb-item"><a href="<?=$pageName?>">Slides</a></li>
             <li class="breadcrumb-item active" aria-current="page">Novo</li>
           </ol>
         </nav>
@@ -63,7 +63,7 @@ $pageName = "slides";
     <!-- END - DIRECTORY -->
     
     <!-- FORM ADD -->
-    <form id="form-depoimentos" class="row form-validate" action="actions/<?=$pageName?>.php" method="post" enctype="multipart/form-data">
+    <form id="form-depoimentos" class="row form-validate" action="<?=BASE?>actions/<?=$pageName?>" method="post" enctype="multipart/form-data">
       <input type="hidden" name="action" value="add">
 
       <div class="w-100"></div>

@@ -68,7 +68,6 @@ if(isset($_POST['action'])) {
     $item = select("configuration", "*", "id=".$id, "ORDER BY id");
     $item = $item[0];
 
-    print_r($item);
 
     // Assignment for items
     $item['phone1'] = ($phone1 != $item['phone1']) ? $phone1 : $item['phone1'];

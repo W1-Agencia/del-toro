@@ -4,6 +4,7 @@
     require_once "require/functions/select.php";
     $items = select("promotions","*","id");
     $configuration = select("configuration","*","id");
+    $slides = select("slide","*","id");
 
 ?>
 <!doctype html>
@@ -39,13 +40,16 @@
                 <div  class="owl-carousel owl-theme">
                     <div class="item">
                         <!-- item de slide -->
+                        <?php for($i = 0;$i < count($slides); $i ++) : ?>
                             <div class="row mt-5 pt-5">
                                 <div class="col-md mt-5 pt-5 ">
-                                    <h1 class = "display-1 fonte-secundaria cor-amarelo">Del' Toro</h1>
-                                    <h2 class = "cor-branco">Hamburgueria & Steak House Artesanal</h2>
+                                    <h1 class = "display-1 fonte-secundaria cor-amarelo"><?=$slides[$i]['title']?></h1>
+                                    <h2 class = "cor-branco"><?=$slides[$i]['text']?>l</h2>
                                     <p class = "mt-5"><a href="<?= BASE ?>cardapios" class = "botao-principal">VER CARDÁPIOS</a></p>
                                 </div><!-- col-md -->
                             </div><!-- row -->
+                            <?php endfor;?>
+
                     </div><!-- item -->
                 </div><!-- owl-carousel -->
                 <div class="owl-theme"><div class="owl-controls"><div class="custom-nav owl-nav"></div></div>

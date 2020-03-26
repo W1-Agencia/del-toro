@@ -3,8 +3,8 @@ session_start();
 
 if(!isset($_SESSION['user'])) { header("Location:login"); }
 
-require_once '../connection/connection.php';
-require_once '../connection/close_connection.php';
+require_once './connection/connection.php';
+require_once './connection/close_connection.php';
 require_once 'require/functions/select.php';
 
 if(isset($_GET['i']) && isset($_GET['ac']) && isset($_GET['ob'])) {
@@ -48,7 +48,7 @@ $item = select("configuration", "*", "id", "ORDER BY id");
       <div class="col-md-12">
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="admin.php">Inicial</a></li>
+            <li class="breadcrumb-item"><a href="admin">Inicial</a></li>
             <li class="breadcrumb-item active" aria-current="page">Configurações</li>
           </ol>
         </nav>
@@ -57,7 +57,7 @@ $item = select("configuration", "*", "id", "ORDER BY id");
 
     <hr>
 
-    <form id="form" class="row" action="actions/configuration.php" method="post">
+    <form id="form" class="row" action="actions/configuracao" method="post">
       <?php if($item): ?>
       <input type="hidden" name="id" value="<?= $item[0]['id'] ?>">
       <?php endif; ?>

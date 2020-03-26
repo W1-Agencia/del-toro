@@ -71,7 +71,7 @@ $countPage = $countItems / $rows;
     <!-- BTN ADD -->
     <div class="row content-link-add-admin">
       <div class="col-md-12">
-        <a href="<?=$pageName?>_add.php" class="btn btn-success"><i class="fas fa-plus"></i> Novo Slide</a>
+        <a href="<?=BASE?><?=$pageName?>-adicionar" class="btn btn-success"><i class="fas fa-plus"></i> Novo Slide</a>
       </div>
     </div>
     <!-- END - BTN ADD -->
@@ -103,7 +103,8 @@ $countPage = $countItems / $rows;
               <td><?= $items[$i]['text'] ?></td>
 
             <td class="col-actions">
-                <a class="link-action-edit" href="<?=$pageName?>_edit.php?id=<?= $items[$i]['id'] ?>" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="editar">
+              <form action="<?= BASE ?>slides-editar?<?= $items[$i]['id']?>" method="GET" ></form>
+                <a class="submit" href="<?= BASE ?>slides-editar/<?= $items[$i]['id']?>" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="editar">
                   <i class="far fa-edit"></i>
                 </a>
                 <span id="popover" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="excluir">
@@ -138,7 +139,7 @@ $countPage = $countItems / $rows;
         <?php else : ?>
         <h4 class="table-empty">
           Nenhum slide publicado no site. 
-          <a href="<?=$pageName?>_add.php">Adicionar um novo slide.</a>
+          <a href="<?=$pageName?>-adicionar">Adicionar um novo slide.</a>
         </h4>
         <?php endif ?>
 
@@ -163,7 +164,7 @@ $countPage = $countItems / $rows;
           <p>Deseja realmente remover este <b>slide</b>?</p>
         </div>
 
-        <form method="POST" action="actions/<?=$pageName?>.php" class="modal-footer form-remove">
+        <form method="POST" action="<?=$pageName?>-delete" class="modal-footer form-remove">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
           <button type="submit" id="btn-confirm-remove" class="btn btn-danger">Sim</button>
           <input type="hidden" name="action" value="remove">

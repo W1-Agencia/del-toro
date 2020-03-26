@@ -1,6 +1,8 @@
 <?php 
 session_start();
-
+require_once './connection/connection.php';
+require_once './connection/close_connection.php';
+require_once 'require/functions/select.php';
 if(!isset($_SESSION['user']))
   header("Location:login");
 
@@ -15,7 +17,10 @@ if(isset($_GET['i']) && isset($_GET['ac']) && isset($_GET['ob'])) {
 }
 
 // Sets
-$pageName = "menu";
+$pageName = "cardapios";
+
+$items = select("tfood", "*", "id", "ORDER BY ordenation ASC");
+$sub = select("mfood","*", "id", "ORDER BY ordenation ASC")
 ?>
 
 <!DOCTYPE html>
@@ -54,7 +59,7 @@ $pageName = "menu";
       <div class="col-md-12">
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="<?=$pageName?>.php">Cardápio</a></li>
+            <li class="breadcrumb-item"><a href="<?=$pageName?>">Cardápio</a></li>
             <li class="breadcrumb-item active" aria-current="page">Novo</li>
           </ol>
         </nav>
@@ -65,24 +70,29 @@ $pageName = "menu";
     <!-- END - DIRECTORY -->
     
     <!-- FORM ADD -->
-    <form class="row form-validate" action="actions/<?=$pageName?>.php" method="POST">
+    <form class="row form-validate" action="<?=BASE?>actions/<?=$pageName?>" method="POST">
       <input type="hidden" name="action" value="add">
       <div class="form-group col-md-4">
-        <label for="inputState">Tipo de alimento</label>
+        <label for="inputState">Categoria de alimentos</label>
         <select id="inputState" class="form-control" name='options'>
           <option selected>Selecione...</option>
-          <option value='1'>
-            Opção Vegetariana
+          <?php for($i=0; $i < count($items); $i++) :?>
+          <option value='<?=$items[$i]['ordenation']?>'>
+            <?=$items[$i]['alimento']?>
           </option>
-          <option value='2'>
-            Teste
+          <?php endfor; ?>
+        </select>
+      </div>
+      
+      <div class="form-group col-md-4">
+        <label for="inputState">Sub-categoria de alimentos</label>
+        <select id="inputState" class="form-control" name='optionssub'>
+          <option selected>Selecione...</option>
+          <?php for($i=0; $i < count($sub); $i++) :?>
+          <option value='<?=$sub[$i]['ordenation']?>'>
+            <?=$sub[$i]['subalimento']?>
           </option>
-          <option value='3'>
-            Cerveja
-          </option>
-          <option value='4'>
-            Sorvete
-          </option>
+          <?php endfor; ?>
         </select>
       </div>
 

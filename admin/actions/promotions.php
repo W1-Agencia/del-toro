@@ -1,12 +1,12 @@
 <?php
-require_once '../../connection/connection.php';
-require_once '../../connection/close_connection.php';
-require_once '../require/functions/insert.php';
-require_once '../require/functions/select.php';
-require_once '../require/functions/update.php';
-require_once '../require/functions/delete.php';
-require_once '../require/functions/files.php';
-require_once '../require/functions/ordenation.php';
+require_once './connection/connection.php';
+require_once './connection/close_connection.php';
+require_once './require/functions/insert.php';
+require_once './require/functions/select.php';
+require_once './require/functions/update.php';
+require_once './require/functions/delete.php';
+require_once './require/functions/ordenation.php';
+require_once "./admin/require/functions/files.php";
 
 setlocale(LC_ALL,'pt_BR.UTF8');
 mb_internal_encoding('UTF8'); 
@@ -15,11 +15,13 @@ mb_regex_encoding('UTF8');
 if(isset($_POST['action'])) {
 
   $object = "Cardápio";
-  $namePage = "promotions";
+  $namePage = "promocoes";
   $nameTable = "promotions";
-  $imageDiretory = "../require/img/promotions/";
+  $imageDiretory = "./admin/require/img/promotions/";
 
   if ($_POST['action'] == 'add') {
+      $real = $_POST['value'];
+      $value = number_format($real,2,'.',',');
       $lastItem = select($nameTable, "*", "id", "ORDER BY ordenation DESC", "LIMIT 1");
       $ordenation = (!$lastItem) ? 1 : $lastItem[0]['ordenation'] + 1;
       $img = saveImage($_FILES['file'], $imageDiretory);
@@ -31,7 +33,7 @@ if(isset($_POST['action'])) {
         array('name_prod', 'descriptions_prod', 'value_prod','date_init', 'date_end','namedir','ordenation'),
         array($_POST['name'],
               $_POST['text'],
-              $_POST['value'],
+              $value,
               date('Y-m-d',strtotime($_POST['dataPublicao'])),
               date('Y-m-d',strtotime($_POST['dataFinalPublicacao'])),
               $img,
@@ -39,15 +41,17 @@ if(isset($_POST['action'])) {
         $nameTable
     );
       if ($return) {
-        header("Location:../".$namePage.".php?i=scs&ac=add&ob=".$object);
+        header("Location:".BASE.$namePage."");
       } else {
-        header("Location:../".$namePage.".php?i=err&ac=add&ob=".$object);
+        header("Location:".BASE.$namePage."");
       }
     }
   }
 
   // EDIT
   elseif($_POST['action'] == 'edit') {
+    $real = $_POST['value'];
+    $value = number_format($real,2,'.',',');
     $id = $_POST['id'];
     $img = $_FILES['file'];
 
@@ -74,7 +78,7 @@ if(isset($_POST['action'])) {
         $item['namedir'],
         $_POST['name'],
         $_POST['text'],
-        $_POST['value'],
+        $value,
         date('Y-m-d',strtotime($_POST['dataPublicao'])),
         date('Y-m-d',strtotime($_POST['dataFinalPublicacao'])),
       ), 
@@ -82,9 +86,9 @@ if(isset($_POST['action'])) {
     );
     
     if($return) {
-      header("Location:../".$namePage.".php?i=scs&ac=edit&ob=".$object);
+      header("Location:".BASE.$namePage."");
     } else {
-      header("Location:../".$namePage.".php?i=err&ac=edit&ob=".$object);
+      header("Location:".BASE.$namePage."");
     }
 
   }
@@ -120,16 +124,16 @@ if(isset($_POST['action'])) {
       delete($nameTable, "id=".$id);
 
       // RETURN
-      header("Location:../".$namePage.".php?i=scs&ac=remove&ob=".$object);
+      header("Location:".BASE.$namePage."");
 
     } else { // ERROR
-      header("Location:../".$namePage.".php?i=err&ac=remove&ob=".$object);
+      header("Location:".BASE.$namePage."");
     }
 
   }
 
 } else { // ACTION NOT SENDED
 
-  header("Location:../".$namePage.".php");
+  header("Location:".BASE.$namePage."");
   
 }

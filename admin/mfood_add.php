@@ -14,7 +14,7 @@ if(isset($_GET['i']) && isset($_GET['ac']) && isset($_GET['ob'])) {
   $respOb = "";
 }
 
-$pageName = "tipo-alimento";
+$pageName = "tipo-sub-alimento";
 ?>
 
 <!DOCTYPE html>
@@ -42,8 +42,8 @@ $pageName = "tipo-alimento";
     <!-- TITLE -->
     <div class="row mb-2">
       <div class="col-md-12">
-        <h2>Novo Tipo de alimento</h2>  
-        <small>Publique os tipos de alimentos que você deseja expor aos seus clientes.</small>
+        <h2>Novo Tipo de categoria alimento</h2>  
+        <small>Publique os tipos de categoria alimento que você deseja expor aos seus clientes.</small>
       </div>
     </div>
     <!-- END - TITLE -->
@@ -53,7 +53,7 @@ $pageName = "tipo-alimento";
       <div class="col-md-12">
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="<?=$pageName?>">Tipo de alimentos</a></li>
+            <li class="breadcrumb-item"><a href="<?=$pageName?>">Tipo de categoria alimento</a></li>
             <li class="breadcrumb-item active" aria-current="page">Novo</li>
           </ol>
         </nav>
@@ -63,13 +63,13 @@ $pageName = "tipo-alimento";
     <!-- END - DIRECTORY -->
     
     <!-- FORM ADD -->
-    <form id="form-depoimentos" class="row form-validate" action="<?=BASE?>actions/tipo-alimento" method="post" enctype="multipart/form-data">
+    <form id="form-depoimentos" class="row form-validate" action="<?=BASE?>actions/tipo-sub-alimento" method="post" enctype="multipart/form-data">
       <input type="hidden" name="action" value="add">
 
       <div class="w-100"></div>
 
       <div class="form-group col-md-12">
-        <label for="name">Tipo do alimento*</label>
+        <label for="name">Tipo de categoria de alimento*</label>
         <input type="text" class="form-control" id="name" name="title">
       </div>
 

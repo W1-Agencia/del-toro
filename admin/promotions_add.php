@@ -15,7 +15,7 @@ if(isset($_GET['i']) && isset($_GET['ac']) && isset($_GET['ob'])) {
 }
 
 // Sets
-$pageName = "promotions";
+$pageName = "promocoes";
 ?>
 
 <!DOCTYPE html>
@@ -54,7 +54,7 @@ $pageName = "promotions";
       <div class="col-md-12">
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="<?=$pageName?>.php">Cardápio</a></li>
+            <li class="breadcrumb-item"><a href="<?=$pageName?>">Cardápio</a></li>
             <li class="breadcrumb-item active" aria-current="page">Novo</li>
           </ol>
         </nav>
@@ -65,7 +65,7 @@ $pageName = "promotions";
     <!-- END - DIRECTORY -->
     
     <!-- FORM ADD -->
-    <form class="row form-validate" action="actions/<?=$pageName?>.php" method="POST" enctype="multipart/form-data">
+    <form class="row form-validate" action="<?=BASE?>actions/<?=$pageName?>" method="POST" enctype="multipart/form-data">
       <input type="hidden" name="action" value="add">
       <div class="form-group col-md-12">
         <label for="name">Nome da Promo*</label>
@@ -83,7 +83,7 @@ $pageName = "promotions";
 
       <div class="form-group col-md-6">
         <label for="name">Preço*</label>
-        <input type="text" class="form-control" id="value" name="value">
+        <input type="text" class="form-control real" id="value" name="value">
       </div>
 
       <div class="form-group col-md-3">

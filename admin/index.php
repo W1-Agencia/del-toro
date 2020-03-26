@@ -1,7 +1,7 @@
 <?php
 session_start();
 if(isset($_SESSION['user'])) {
-  header("Location: admin.php");
+  header("Location: admin");
 }
 
 ?>
@@ -21,7 +21,7 @@ if(isset($_SESSION['user'])) {
   <div class="content-page">
     <div class="content-page" >
       <div class="row">
-        <form class="justify-content-center form-login" action="actions/login.php" method="POST">
+        <form class="justify-content-center form-login" action="actions/login" method="POST">
           <div class="logo-admin">
             <img class="img-fluid" src="require/img/w1.png">
           </div>

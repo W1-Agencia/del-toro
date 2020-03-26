@@ -1,40 +1,39 @@
 <?php
-require_once '../../connection/connection.php';
-require_once '../../connection/close_connection.php';
-require_once '../require/functions/insert.php';
-require_once '../require/functions/select.php';
-require_once '../require/functions/update.php';
-require_once '../require/functions/delete.php';
-require_once '../require/functions/files.php';
-require_once '../require/functions/ordenation.php';
+require_once './connection/connection.php';
+require_once './connection/close_connection.php';
+require_once './require/functions/insert.php';
+require_once './require/functions/select.php';
+require_once './require/functions/update.php';
+require_once './require/functions/delete.php';
+require_once './require/functions/ordenation.php';
 
 setlocale(LC_ALL,'pt_BR.UTF8');
 mb_internal_encoding('UTF8'); 
 mb_regex_encoding('UTF8');
 
 if(isset($_POST['action'])) {
-
   $object = "Cardápio";
-  $namePage = "menu";
+  $namePage = "cardapios";
   $nameTable = "menu";
 
   if($_POST['action'] == 'add') {
     // ORDENATION
     $lastItem = select($nameTable, "*", "id", "ORDER BY ordenation DESC", "LIMIT 1");
     $ordenation = (!$lastItem) ? 1 : $lastItem[0]['ordenation'] + 1;
-
+    $real = $_POST['value'];
+    $value = number_format($real,2,'.',',');
       // INSERT
       $return = insert(
-        array('id_product', 'name_product', 'description_product','value_product', 'ordenation'), 
-        array($_POST['options'], $_POST['name'], $_POST['text'], $_POST['value'], $ordenation),
+        array('id_product', 'sub_id_product', 'name_product', 'description_product','value_product', 'ordenation'), 
+        array($_POST['options'], $_POST['optionssub'], $_POST['name'], $_POST['text'], $value, $ordenation),
         $nameTable
       );
 
       // RETURN
       if($return) {
-        header("Location:../".$namePage.".php?i=scs&ac=add&ob=".$object);
+        header("Location:".BASE.$namePage."");
       } else {
-          header("Location:../".$namePage.".php?i=err&ac=add&ob=".$object);
+        header("Location:".BASE.$namePage."");
       }   
     }
 
@@ -43,9 +42,11 @@ if(isset($_POST['action'])) {
     // VALUES - POST
     $id = $_POST['id'];
     $opcao = $_POST['options'];
+    $opcaosub = $_POST['optionssub'];
     $title = $_POST['title'];
     $text = $_POST['text']; 
-    $valor = $_POST['value'];
+    $real = $_POST['value'];
+    $valor = number_format($real,2,'.',',');
     $ordenation = $_POST['ordenation'];
 
     // SELECT ITEMS
@@ -62,6 +63,8 @@ if(isset($_POST['action'])) {
     $return = update(
       array(
         'name_product',
+        'id_product',
+        'sub_id_product',
         'description_product',
         'value_product',
         'ordenation'
@@ -77,9 +80,9 @@ if(isset($_POST['action'])) {
     
     // RETURN
     if($return) {
-      header("Location:../".$namePage.".php?i=scs&ac=edit&ob=".$object);
+      header("Location:".BASE.$namePage."");
     } else {
-      header("Location:../".$namePage.".php?i=err&ac=edit&ob=".$object);
+      header("Location:".BASE.$namePage."");
     }
 
   }
@@ -115,16 +118,16 @@ if(isset($_POST['action'])) {
       delete($nameTable, "id=".$id);
 
       // RETURN
-      header("Location:../".$namePage.".php?i=scs&ac=remove&ob=".$object);
+      header("Location:".BASE.$namePage."");
 
     } else { // ERROR
-      header("Location:../".$namePage.".php?i=err&ac=remove&ob=".$object);
+      header("Location:".BASE.$namePage."");
     }
 
   }
 
 } else { // ACTION NOT SENDED
 
-  header("Location:../".$namePage.".php");
+  header("Location:".BASE.$namePage."");
   
 }

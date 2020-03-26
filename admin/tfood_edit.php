@@ -19,15 +19,16 @@ if(isset($_GET['i']) && isset($_GET['ac']) && isset($_GET['ob'])) {
 }
 
 // Sets
-$pageName = "food";
+$pageName = "tipo-alimento";
 
 $_GET['id'] ? 
-  $slides = select("food", "*", "id=".$_GET['id']) :
-  header("Location:slides.php");
+  $slides = select("tfood", "*", "id=".$_GET['id']) :
+  header("Location:tipo-alimento");
 
 if($slides) {
   $id = $slides[0]['id'];
-  $name = $slides[0]['title'];
+  $name = $slides[0]['alimento'];
+  $ordenation = $slides[0]['ordenation'];
 }
 
 ?>
@@ -44,7 +45,7 @@ if($slides) {
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.css" rel="stylesheet">  
-  <link rel="stylesheet" href="require/css/style.css">
+  <link rel="stylesheet" href="../require/css/style.css">
 </head>
 <body>
   <!-- TOP MENU -->
@@ -67,7 +68,7 @@ if($slides) {
       <div class="col-md-12">
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="<?=$pageName?>.php">Tipo de alimento</a></li>
+            <li class="breadcrumb-item"><a href="../<?=$pageName?>">Tipo de alimento</a></li>
             <li class="breadcrumb-item active" aria-current="page">Editar</li>
           </ol>
         </nav>
@@ -78,9 +79,10 @@ if($slides) {
     <!-- END - DIRECTORY -->
 
     <!-- FORM EDIT -->
-    <form id="form-quartos-edit" action="actions/<?=$pageName?>.php" class="row form-validate" method="post" enctype="multipart/form-data">
+    <form id="form-quartos-edit" action="../actions/<?=$pageName?>" class="row form-validate" method="post" enctype="multipart/form-data">
       <input type="hidden" name="action" value="edit">
       <input type="hidden" name="id" value="<?= $id ?> ">
+      <input type="hidden" name="ordenation" value="<?= $ordenation ?> ">
 
       <div class="form-group col-md-4">
         <label for="name">Titulo*</label>

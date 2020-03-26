@@ -19,25 +19,17 @@ if(isset($_GET['i']) && isset($_GET['ac']) && isset($_GET['ob'])) {
 }
 
 // Sets
-$pageName = "cardapios";
+$pageName = "tipo-sub-alimento";
 
 $_GET['id'] ? 
-  $menu = select("menu", "*", "id=".$_GET['id']) :
-  header("Location:cardapios");
+  $slides = select("mfood", "*", "id=".$_GET['id']) :
+  header("Location:tipo-sub-alimento");
 
-if($menu) {
-  $id = $menu[0]['id'];
-  $name = $menu[0]['name_product'];
-  $text = $menu[0]['description_product'];
-  $value = number_format($menu[0]['value_product'],2,',','.');
-  $select = $menu[0]['id_product'];
-  $subselect = $menu[0]['sub_id_product'];
-
+if($slides) {
+  $id = $slides[0]['id'];
+  $name = $slides[0]['subalimento'];
+  $ordenation = $slides[0]['ordenation'];
 }
-$items = select("tfood", "*", "ordenation LIKE ".$select."");
-$itemsAll = select("tfood", "*", "id","ORDER BY ordenation ASC");
-$sub = select("mfood", "*", "ordenation LIKE ".$subselect."");
-$itemsAllsub = select("mfood", "*", "id","ORDER BY ordenation ASC");
 
 ?>
 
@@ -53,7 +45,6 @@ $itemsAllsub = select("mfood", "*", "id","ORDER BY ordenation ASC");
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.css" rel="stylesheet">  
-  <link rel="stylesheet" href="require/css/jquery.css">
   <link rel="stylesheet" href="../require/css/style.css">
 </head>
 <body>
@@ -66,8 +57,8 @@ $itemsAllsub = select("mfood", "*", "id","ORDER BY ordenation ASC");
     <!-- TITLE -->
     <div class="row mb-2">
       <div class="col-md-12">
-        <h3>Editar Cardápio</h3>
-        <small>Edite os cardápios que você publicou.</small>
+        <h3>Editar Tipo de categoria de alimento</h3>
+        <small>Edite os tipos de categoria de alimentos que você publicou.</small>
       </div>
     </div>
     <!-- END - TITLE -->
@@ -77,7 +68,7 @@ $itemsAllsub = select("mfood", "*", "id","ORDER BY ordenation ASC");
       <div class="col-md-12">
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="<?=$pageName?>">Cardápio</a></li>
+            <li class="breadcrumb-item"><a href="../<?=$pageName?>">Tipo de categoria de alimentos</a></li>
             <li class="breadcrumb-item active" aria-current="page">Editar</li>
           </ol>
         </nav>
@@ -91,58 +82,17 @@ $itemsAllsub = select("mfood", "*", "id","ORDER BY ordenation ASC");
     <form id="form-quartos-edit" action="../actions/<?=$pageName?>" class="row form-validate" method="post" enctype="multipart/form-data">
       <input type="hidden" name="action" value="edit">
       <input type="hidden" name="id" value="<?= $id ?> ">
+      <input type="hidden" name="ordenation" value="<?= $ordenation ?> ">
 
       <div class="form-group col-md-4">
-        <label for="inputState">Selecione a categoria de alimento</label>
-          <select id="inputState" class="form-control" name='options'>
-            <?php if($select == $items[0]['ordenation']){ ?>
-                <option select><?=$items[0]['alimento'];?></option>
-                <?php for($i=0; $i < count($itemsAll); $i++) :?>
-                  <option value="<?php $itemsAll[$i]['ordenation']?>"><?=$itemsAll[$i]['alimento']?></option>
-                <?php endfor; ?>
-              <?php } ?>
-          </select>
-      </div>
-
-      <div class="form-group col-md-4">
-        <label for="inputState">Selecione a sub categoria de alimento</label>
-          <select id="inputState" class="form-control" name='optionssub'>
-            <?php if($subselect == $sub[0]['ordenation']){ ?>
-                <option select><?=$sub[0]['subalimento'];?></option>
-                <?php for($i=0; $i < count($itemsAllsub); $i++) :?>
-                  <option value="<?php $itemsAllsub[$i]['ordenation']?>"><?=$itemsAllsub[$i]['subalimento']?></option>
-                <?php endfor; ?>
-              <?php }else{ ?>
-                <option selected>Selecione ...</option>
-                <?php for($i=0; $i < count($itemsAllsub); $i++) :?>
-                  <option value="<?php $itemsAllsub[$i]['ordenation']?>"><?=$itemsAllsub[$i]['subalimento']?></option>
-                <?php endfor; ?>
-              <?php } ?>
-          </select>
-      </div>
-
-      <div class="form-group col-md-4">
-        <label for="name">Prato*</label>
+        <label for="name">Titulo*</label>
         <input type="text" class="form-control" id="name" name="title" value="<?= $name ?>">
       </div>
 
-      <div class="form-group col-md-12">
-        <label for="content">Texto*</label>
-        <textarea id="summernote" class="form-control" name="text"><?= $text ?></textarea>
-      </div>
+      <div class="w-100"></div>
 
-      <div class="form-group col-md-3">
-        <label for="name">Preço*</label>
-        <input type="text" class="form-control" id="value" name="value" value="<?=$value?>">
-      </div>
-      
+
       <ul class="form-group col-md-12 container-error"></ul>   
-
-      <div class="form-group col-md-3">
-        <label for="position">Ordem de apresentação*</label>
-        <input type="text" class="form-control" name="ordenation" value="<?= $menu[0]['ordenation'] ?>">
-      </div> 
-
 
       <div class="col-md-12">
         <hr>
@@ -168,7 +118,7 @@ $itemsAllsub = select("mfood", "*", "id","ORDER BY ordenation ASC");
         <div class="modal-body">
           <p>Você realmente quer remover esta imagem?</p>
         </div>
-        <form method="POST" action="actions/<?=$pageName?>" class="modal-footer form-remove">
+        <form method="POST" action="<?=BASE?>actions/<?=$pageName?>" class="modal-footer form-remove">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
           <button type="submit" id="btn-confirm-remove" class="btn btn-danger">Sim</button>
           <input type="hidden" name="action" value="removeImage">

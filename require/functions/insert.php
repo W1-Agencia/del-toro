@@ -29,7 +29,7 @@
 				closeConnection($conexao);
 				return true;
 			} else {
-				echo "Query inválida!<br>";die (trigger_error(mysql_error()));
+				echo "Query inválida!<br>";die (trigger_error(mysqli_connect_errno()));
 				return false;
 			}
 		} else {

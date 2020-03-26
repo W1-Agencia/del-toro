@@ -14,9 +14,9 @@ mb_regex_encoding('UTF8');
 
 if(isset($_POST['action'])) {
 
-  $object = "Slides";
-  $namePage = "slides";
-  $nameTable = "slide";
+  $object = "Alimento";
+  $namePage = "tipo-sub-alimento";
+  $nameTable = "mfood";
 
   if($_POST['action'] == 'add') {
 
@@ -28,8 +28,8 @@ if(isset($_POST['action'])) {
 
       // INSERT
       $return = insert(
-        array("title", "text",  "ordenation"), 
-        array($_POST['title'], $_POST['text'],  $ordenation),
+        array("subalimento","ordenation"), 
+        array($_POST['title'],$ordenation),
         $nameTable
       );
 
@@ -46,7 +46,6 @@ if(isset($_POST['action'])) {
 
     // VALUES - POST
     $id = $_POST['id'];
-    $text = $_POST['text'];
     $title = $_POST['title'];
     $ordenation = $_POST['ordenation'];
 
@@ -61,19 +60,16 @@ if(isset($_POST['action'])) {
     // IMAGE
 
     // ITEMS
-    $item['text'] = ($text != $item['text']) ? $text : $item['text'];
-    $item['title'] = ($title != $item['title']) ? $title : $item['title'];
+    $item['subalimento'] = ($title != $item['subalimento']) ? $title : $item['subalimento'];
 
     // UPDATE
     $return = update(
       array(
-        'text', 
-        'title',
+        'subalimento',
         'ordenation'
       ), 
       array(
-        $item['text'], 
-        $item['title'],
+        $item['subalimento'],
         $item['ordenation']
       ), 
       $nameTable, "id = " . $id

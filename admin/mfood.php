@@ -19,7 +19,7 @@ if(isset($_GET['i']) && isset($_GET['ac']) && isset($_GET['ob'])) {
 }
 
 // SETS
-$pageName = "tipo-alimento";
+$pageName = "tipo-sub-alimento";
 
 $rows = 10;
 
@@ -28,8 +28,8 @@ $page = isset($_GET['page']) ? $_GET['page'] : "";
 $start_page = $pageCurrent - 1;
 $start_page = $start_page * $rows;
 
-$items = select("tfood", "*", "id", "ORDER BY ordenation ASC", "LIMIT $start_page, $rows");
-$itemsAll = select("tfood", "*", "id", "ORDER BY ordenation ASC");
+$items = select("mfood", "*", "id", "ORDER BY ordenation ASC", "LIMIT $start_page, $rows");
+$itemsAll = select("mfood", "*", "id", "ORDER BY ordenation ASC");
 
 $countItems = ($itemsAll ? count($itemsAll) : "0");
 $countPage = $countItems / $rows;
@@ -60,7 +60,7 @@ $countPage = $countItems / $rows;
     <!-- TITLE -->
     <div class="row">
       <div class="col-md-12">
-        <h2>Tipo de alimentos</h2>
+        <h2>Tipo de sub-categorias alimentos</h2>
         <small>Publique os tipos de comida que deseja seus clientes vejam.</small>
       </div>
     </div>
@@ -96,13 +96,13 @@ $countPage = $countItems / $rows;
             <?php for($i = 0; $i < count($items); $i++) : ?>
             <tr id="<?= $items[$i]['id'] ?>">
 
-              <td><?= $items[$i]['alimento'] ?></td>
+              <td><?= $items[$i]['subalimento'] ?></td>
               <td><?=$items[$i]['ordenation']?></td>
 
 
             <td class="col-actions">
-              <form action="<?= BASE ?>tipo-alimento-editar?<?= $items[$i]['id']?>" method="GET" ></form>
-                <a class="link-action-edit" href="<?= BASE ?>tipo-alimento-editar/<?= $items[$i]['id'] ?>" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="editar">
+              <form action="<?= BASE ?>tipo-sub-alimento-editar?<?= $items[$i]['id']?>" method="GET" ></form>
+                <a class="link-action-edit" href="<?= BASE ?>tipo-sub-alimento-editar/<?= $items[$i]['id'] ?>" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="editar">
                   <i class="far fa-edit"></i>
                 </a>
                 <span id="popover" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="excluir">
@@ -162,7 +162,7 @@ $countPage = $countItems / $rows;
           <p>Deseja realmente remover este <b>Tipo de alimento</b>?</p>
         </div>
 
-        <form method="POST" action="tipo-alimento-delete" class="modal-footer form-remove">
+        <form method="POST" action="tipo-sub-alimento-delete" class="modal-footer form-remove">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
           <button type="submit" id="btn-confirm-remove" class="btn btn-danger">Sim</button>
           <input type="hidden" name="action" value="remove">

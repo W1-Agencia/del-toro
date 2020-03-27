@@ -17,7 +17,7 @@ if(!isset($_SESSION['user'])) {
   <link rel="icon" href="../favicon.png">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
   <link rel="stylesheet" href="require/css/bootstrap.min.css">
-  <link rel="stylesheet" href="require/css/style.css">
+  <link rel="stylesheet" href="<?=BASE?>require/css/style.css">
 </head>
 
 <body>

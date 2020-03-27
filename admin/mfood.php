@@ -47,7 +47,7 @@ $countPage = $countItems / $rows;
   <link rel="icon" href="favicon.png">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
-  <link rel="stylesheet" href="require/css/style.css">
+  <link rel="stylesheet" href="<?=BASE?>require/css/style.css">
 </head>
 
 <body>
@@ -106,7 +106,7 @@ $countPage = $countItems / $rows;
                   <i class="far fa-edit"></i>
                 </a>
                 <span id="popover" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="excluir">
-                  <a class="link-action-remove" href="#" data-toggle="modal" data-target="#removemodal">
+                  <a class="link-action-remove" href="" data-toggle="modal" data-target="#removemodal">
                     <i class="fas fa-trash"></i>
                   </a>
                 </span>
@@ -124,12 +124,15 @@ $countPage = $countItems / $rows;
         <nav aria-label="Page navigation navPagination">
           <ul class="pagination">
             <?php if($pageCurrent > 1) { ?>
+              <form action="<?= BASE ?><?=$pageName?>?<?= $items[$i]['id']?>" method="GET" ></form>
             <li class="page-item"><a class="page-link" 
-              href="?page=<?=$before?>">Anterior</a></li>
+              href="<?= BASE ?>tipo-sub-alimento/<?=$before?>">Anterior</a></li>
             <?php } if ($pageCurrent<$countPage) {?>
 
             <li class="page-item"><a class="page-link" 
-              href="?page=<?=$after?>">Próximo</a></li>
+              href="<?= BASE ?>tipo-sub-alimento/<?=$after?>">Próximo</a>
+            </li>
+            </form>
             <?php } ?>
           </ul>
         </nav>
@@ -162,7 +165,7 @@ $countPage = $countItems / $rows;
           <p>Deseja realmente remover este <b>Tipo de alimento</b>?</p>
         </div>
 
-        <form method="POST" action="tipo-sub-alimento-delete" class="modal-footer form-remove">
+        <form method="POST" action="<?=BASE?>tipo-sub-alimento-delete?<?=$page ?>" class="modal-footer form-remove">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
           <button type="submit" id="btn-confirm-remove" class="btn btn-danger">Sim</button>
           <input type="hidden" name="action" value="remove">

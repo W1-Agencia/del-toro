@@ -28,8 +28,8 @@ if(isset($_POST['action'])) {
 
       // INSERT
       $return = insert(
-        array("subalimento","ordenation"), 
-        array($_POST['title'],$ordenation),
+        array("subalimento","ordenation","id_categoria"), 
+        array($_POST['title'],$ordenation,$_POST['options']),
         $nameTable
       );
 
@@ -48,7 +48,8 @@ if(isset($_POST['action'])) {
     $id = $_POST['id'];
     $title = $_POST['title'];
     $ordenation = $_POST['ordenation'];
-
+    $opcao = $_POST['options'];
+    
     // SELECT ITEMS
     $allItems = select($nameTable, "*", "id");
     $item = select($nameTable, "*", "id=".$id);
@@ -62,15 +63,19 @@ if(isset($_POST['action'])) {
     // ITEMS
     $item['subalimento'] = ($title != $item['subalimento']) ? $title : $item['subalimento'];
 
+    $item['id_categoria'] = ($opcao != $item['id_categoria']) ? $opcao : $item['id_categoria'];
+
     // UPDATE
     $return = update(
       array(
         'subalimento',
-        'ordenation'
+        'ordenation',
+        'id_categoria'
       ), 
       array(
         $item['subalimento'],
-        $item['ordenation']
+        $item['ordenation'],
+        $item['id_categoria']
       ), 
       $nameTable, "id = " . $id
     );

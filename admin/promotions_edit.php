@@ -19,11 +19,11 @@ if(isset($_GET['i']) && isset($_GET['ac']) && isset($_GET['ob'])) {
 }
 
 // Sets
-$pageName = "promotions";
+$pageName = "promocoes";
 
 $_GET['id'] ? 
   $promotions = select("promotions", "*", "id=".$_GET['id']) :
-  header("Location:promotions.php");
+  header("Location:promocoes");
 
 if($promotions) {
   $id = $promotions[0]['id'];
@@ -50,7 +50,7 @@ if($promotions) {
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.css" rel="stylesheet">  
-  <link rel="stylesheet" href="require/css/style.css">
+  <link rel="stylesheet" href="<?=BASE?>require/css/style.css">
 </head>
 <body>
   <!-- TOP MENU -->
@@ -73,7 +73,7 @@ if($promotions) {
       <div class="col-md-12">
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="<?=$pageName?>.php">Promoção</a></li>
+            <li class="breadcrumb-item"><a href="<?=$pageName?>">Promoção</a></li>
             <li class="breadcrumb-item active" aria-current="page">Editar</li>
           </ol>
         </nav>
@@ -84,7 +84,7 @@ if($promotions) {
     <!-- END - DIRECTORY -->
 
     <!-- FORM EDIT -->
-    <form id="form-depoimentos-edit" action="actions/<?=$pageName?>.php" class="row form-validate" method="post" enctype="multipart/form-data">
+    <form id="form-depoimentos-edit" action="../actions/<?=$pageName?>" class="row form-validate" method="post" enctype="multipart/form-data">
       <input type="hidden" name="action" value="edit">
       <input type="hidden" name="id" value="<?= $id ?> ">
 
@@ -171,7 +171,7 @@ if($promotions) {
         <div class="modal-body">
           <p>Você realmente quer remover esta imagem?</p>
         </div>
-        <form method="POST" action="actions/<?=$pageName?>.php" class="modal-footer form-remove">
+        <form method="POST" action="<?=$pageName?>-deletar" class="modal-footer form-remove">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
           <button type="submit" id="btn-confirm-remove" class="btn btn-danger">Sim</button>
           <input type="hidden" name="action" value="removeImage">

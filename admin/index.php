@@ -14,7 +14,7 @@ if(isset($_SESSION['user'])) {
   <title>Login administrativo</title>
   <link rel="icon" href="favicon.png">
   <link rel="stylesheet" href="require/css/bootstrap.min.css">
-  <link rel="stylesheet" type="text/css" href="./require/css/style.css">
+  <link rel="stylesheet" href="<?=BASE?>require/css/style.css">
   
 </head>
 <body>

@@ -33,7 +33,7 @@ $item = select("configuration", "*", "id", "ORDER BY id");
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.css">  
-  <link rel="stylesheet" href="require/css/style.css">
+  <link rel="stylesheet" href="<?=BASE?>require/css/style.css">
 </head>
 <body>
 

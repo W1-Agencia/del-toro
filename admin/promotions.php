@@ -44,7 +44,7 @@ $countPage = $countItems / $rows;
   <link rel="icon" href="favicon.png">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
-  <link rel="stylesheet" href="./require/css/style.css">
+  <link rel="stylesheet" href="<?=BASE?>require/css/style.css">
 </head>
 
 <body>
@@ -105,7 +105,8 @@ $countPage = $countItems / $rows;
               <td><?= number_format($items[$i]['value_prod'],2,',','.') ?> R$</td>
 
             <td class="col-actions">
-                <a class="link-action-edit" href="promocoes-editar/editar/<?= $items[$i]['id'] ?>" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="editar">
+            <form action="<?= BASE ?>promocoes-editar?<?= $items[$i]['id']?>" method="GET" ></form>
+                <a class="link-action-edit" href="<?=BASE?>promocoes-editar/<?= $items[$i]['id'] ?>" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="editar">
                   <i class="far fa-edit"></i>
                 </a>
                 <span id="popover" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="excluir">
@@ -127,12 +128,14 @@ $countPage = $countItems / $rows;
         <nav aria-label="Page navigation navPagination">
           <ul class="pagination">
             <?php if($pageCurrent > 1) { ?>
+            <form action="<?= BASE ?><?=$pageName?>?<?= $items[$i]['id']?>" method="GET" ></form>
+
             <li class="page-item"><a class="page-link" 
-              href="?page=<?=$before?>">Anterior</a></li>
+              href="<?= BASE ?>promocoes/<?=$before?>">Anterior</a></li>
             <?php } if ($pageCurrent<$countPage) {?>
 
             <li class="page-item"><a class="page-link" 
-              href="?page=<?=$after?>">Próximo</a></li>
+              href="<?= BASE ?>promocoes/<?=$after?>">Próximo</a></li>
             <?php } ?>
           </ul>
         </nav>

@@ -1,3 +1,12 @@
+<?php 
+    require_once "connection/connection.php";
+    require_once "connection/close_connection.php";
+    require_once "require/functions/select.php";
+    $categoria = select("tfood","*","id");
+    //$subcategoria = select("mfood","*","id");
+    //$cardapio = select("menu","*","id");
+
+?>
 <!doctype html>
 <html>
 <head>
@@ -32,21 +41,11 @@
                 <div class="col-md mt-5 pt-5 ">
                     <h1 class = "display-1 fonte-secundaria cor-amarelo pb-5">CARDÁPIO DO DEL'TORO</h1>
                     <ul class="nav justify-content-center nav-atalho-cardapio">
+                        <?php for($i = 0;$i < count($categoria); $i++) :?>
                             <li class="nav-item">
-                                <a class="nav-link" href="<?= BASE ?>cardapios#petiscos">Petiscos</a>
+                                <a class="nav-link" href="<?= BASE ?>cardapios#<?=strtolower($categoria[$i]['alimento'])?>"><?=strtolower($categoria[$i]['alimento'])?></a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="<?= BASE ?>cardapios#sanduiches">Sanduíches</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="<?= BASE ?>cardapios#pratos">Pratos</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="<?= BASE ?>cardapios#steak">Steak</a>
-                            </li>                            
-                            <li class="nav-item">
-                                <a class="nav-link" href="<?= BASE ?>cardapios#doces">Doces</a>
-                            </li>
+                        <?php endfor; ?>
                         </ul>                        
                 </div><!-- col-md -->
             </div><!-- row -->
@@ -58,266 +57,72 @@
         </div><!-- container -->
       </section><!-- slider -->
 
-
-      <section id="petiscos" class = " fundo-sessao-cardapios petiscos">
+      <?php 
+      for($i = 0;$i < count($categoria); $i++) :
+        $subcategoria = select("mfood","*","id_categoria = ".$categoria[$i]['ordenation']);
+      ?>
+            
+      <section id="petiscos" class = " fundo-sessao-cardapios <?=strtolower($categoria[$i]['alimento'])?>">
         <div class = "container-fluid">
             <div class="row">
-                <div class="col-md-4 p-5  ">
-                    <h1 class = "pt-5 pb-5 mt-5 display-3 fonte-secundaria cor-branco texto-sombra">Petiscos</h1>
+            
+                <div class="col-md-4 p-5">
+                    <h1 class = "pt-5 pb-5 mt-5 display-3 fonte-secundaria cor-branco texto-sombra"><?=$categoria[$i]['alimento']?></h1>
                 </div><!-- col-md -->
+
                 <div class="col-md-1 cardapios-sessao"><!-- nulo --></div>
 
                 <div class = "col-md p-5 cardapios-sessao">
+
                     <!------------------- -->
+                    <?php
+                    if($subcategoria):
+                        for($j = 0; $j < count($subcategoria); $j++) :
+                    ?>
                     <div class="row pt-5 mb-1 mt-5">
                         <div class="col-md-11">
+                            <?php 
+                                $cardapio = select("menu","*","sub_id_product = ".$subcategoria[$j]['ordenation']);
+                                //$searchColumn = array_column($cardapio,'id_categoria');
+                                //$products = array_search($subcategoria[$j]['ordenation'], $searchColumn);
+                            ?>
+                            
                             <div class="titulo-cardapio text-center mb-5">
-                                <h1 class = "display-4 fonte-secundaria cor-amarelo">Toros especiais</h1>
+                                <h1 class = "display-4 fonte-secundaria cor-amarelo"><?= $subcategoria[$j]['subalimento'] ?></h1>
                                 <p><img src="<?= BASE_IMG ?>extra/linha-branco.png" width = "200px" ></p>
-                            </div><!-- titulo-cardapio -->                      
-                                <div class="item-cardapio mb-5">
-                                    <h4 class = "cor-branco fonte-secundaria">Bolinho de queijo | R$ 19,90</h4>
-                                    <p class = "cor-cinza italico">Petiscos com 99% de queijo </p>
-                                </div><!-- item cardapio -->
-                                <div class="item-cardapio mb-5">
-                                    <h4 class = "cor-branco fonte-secundaria">Batata rúscia especial | R$ 23,90</h4>
-                                    <p class = "cor-cinza italico">Batata rústica com bacon e cheddar.</p>
-                                </div><!-- item cardapio -->
+                            </div><!-- titulo-cardapio -->  
+
+                            <?php 
+                            if($cardapio) :
+                                foreach($cardapio as  $item): ?>
+                            <div class="item-cardapio mb-5">
+                                <h4 class = "cor-branco fonte-secundaria"><?=$item['name_product']?> | R$ <?=$item['value_product']?></h4>
+                                <p class = "cor-cinza italico"><?=$item['description_product']?></p>
+                            </div>
+                            <?php 
+                                endforeach; 
+                            endif;
+                            ?>
+
+                            <!-- <div class="item-cardapio mb-5">
+                                <h4 class = "cor-branco fonte-secundaria">Batata rúscia especial | R$ 23,90</h4>
+                                <p class = "cor-cinza italico">Batata rústica com bacon e cheddar.</p>
+                            </div>item cardapio -->
+
                         </div><!-- col-md-->
                     </div><!-- row -->
+                    <?php 
+                        endfor; 
+                    endif;    
+                    ?>
 
-                    <!------------------- -->
-                    <div class="row pt-5 mb-1 mt-3">
-                        <div class="col-md-11">
-                            <div class="titulo-cardapio text-center mb-5">
-                                <h1 class = "display-4 fonte-secundaria cor-amarelo">T Mix</h1>
-                                <p><img src="<?= BASE_IMG ?>extra/linha-branco.png" width = "200px" ></p>
-                            </div><!-- titulo-cardapio -->                      
-                                <div class="item-cardapio mb-5">
-                                    <h4 class = "cor-branco fonte-secundaria">Frango | R$ 34,90</h4>
-                                </div><!-- item cardapio -->
-                                <div class="item-cardapio mb-5">
-                                    <h4 class = "cor-branco fonte-secundaria">Tilápia | R$ 39,90</h4>
-                                </div><!-- item cardapio -->
-                        </div><!-- col-md-->
-                    </div><!-- row -->
-
-                    <div class="row"><div class="col-md  text-right"><p><a href="#cardapios-paginas" class = "botao-topo">	&#65514; VOLTAR AO TOPO</a></p></div><!-- col-md --></div><!-- row -->
-
-
-                </div><!-- col-md -->
-            </div><!-- row -->
-        </div><!-- container -->
-      </section>
-
-      <section id="sanduiches" class = "fundo-sessao-cardapios sanduiches">
-        <div class = "container-fluid">
-            <div class="row">
-                <div class="col-md-4 p-5 ">
-                    <h1 class = "pt-5 pb-5 mt-5 display-3 fonte-secundaria cor-branco texto-sombra">Sanduíches</h1>
-                </div><!-- col-md -->
-                <div class="col-md-1 cardapios-sessao-var"><!-- nulo --></div>
-
-                <div class = "col-md p-5 cardapios-sessao-var">
-                    <!------------------- -->
-                    <div class="row pt-5 mb-1 mt-5">
-                        <div class="col-md-11">
-                            <div class="titulo-cardapio text-center mb-5">
-                                <h1 class = "display-4 fonte-secundaria cor-amarelo">T Toro</h1>
-                                <p><img src="<?= BASE_IMG ?>extra/linha-branco.png" width = "200px" ></p>
-                            </div><!-- titulo-cardapio -->                      
-                                <div class="item-cardapio mb-5">
-                                    <h4 class = "cor-branco fonte-secundaria">T frango | R$ 19,90</h4>
-                                    <p class = "cor-cinza italico">Pão, frango filetado, mix de folhas, maionese de rúcula, cheddar e mussarela </p>
-                                </div><!-- item cardapio -->
-                                <div class="item-cardapio mb-5">
-                                    <h4 class = "cor-branco fonte-secundaria">T Suíno | R$ 19,00</h4>
-                                    <p class = "cor-cinza italico">Pão, suino filetado, maionese de mostarda, cebola roxa, vinagre e mussarela </p>
-                                </div><!-- item cardapio -->
-                        </div><!-- col-md-->
-                    </div><!-- row -->
-
-                    <!------------------- -->
-                    <div class="row pt-5 mb-1 mt-5">
-                        <div class="col-md-11">
-                            <div class="titulo-cardapio text-center mb-5">
-                                <h1 class = "display-4 fonte-secundaria cor-amarelo">Toro Francês</h1>
-                                <p><img src="<?= BASE_IMG ?>extra/linha-branco.png" width = "200px" ></p>
-                            </div><!-- titulo-cardapio -->                      
-                                <div class="item-cardapio mb-5">
-                                    <h4 class = "cor-branco fonte-secundaria">Toro Francês BBQ  | R$ 00,00</h4>
-                                    <p class = "cor-cinza italico">Nenhuma informação sobre igrediente.</p>
-                                </div><!-- item cardapio -->
-                                <div class="item-cardapio mb-5">
-                                    <h4 class = "cor-branco fonte-secundaria">Toro Francês Huevo  | R$ 00,00</h4>
-                                    <p class = "cor-cinza italico">Nenhuma informação sobre igrediente.</p>
-                                </div><!-- item cardapio -->
-                        </div><!-- col-md-->
-                    </div><!-- row -->
-
-                    <!------------------- -->
-                    <div class="row pt-5 mb-1 mt-5">
-                        <div class="col-md-11">
-                            <div class="titulo-cardapio text-center mb-5">
-                                <h1 class = "display-4 fonte-secundaria cor-amarelo">Burguers Harmonizados </h1>
-                                <p><img src="<?= BASE_IMG ?>extra/linha-branco.png" width = "200px" ></p>
-                            </div><!-- titulo-cardapio -->                      
-                                <div class="item-cardapio mb-5">
-                                    <h4 class = "cor-branco fonte-secundaria">Kids  | R$ 16,90</h4>
-                                    <p class = "cor-cinza italico">Pão mussarela, burguer, cream cheese.</p>
-                                </div><!-- item cardapio -->
-                                <div class="item-cardapio mb-5">
-                                    <h4 class = "cor-branco fonte-secundaria">Vaggie | R$ 29,90</h4>
-                                    <p class = "cor-cinza italico">Pão, burguer vegetariano, mix de folhas, cream cheese, vinagrete, cheddar e musarella</p>
-                                </div><!-- item cardapio -->
-                        </div><!-- col-md-->
-                    </div><!-- row -->
-
-                    <div class="row"><div class="col-md  text-right"><p><a href="#cardapios-paginas" class = "botao-topo">	&#65514; VOLTAR AO TOPO</a></p></div><!-- col-md --></div><!-- row -->
-
-
-                </div><!-- col-md -->
-            </div><!-- row -->
-        </div><!-- container -->
-      </section>
-
-      <section id="pratos" class = "fundo-sessao-cardapios pratos">
-        <div class = "container-fluid">
-            <div class="row">
-                <div class="col-md-4 p-5 ">
-                    <h1 class = "pt-5 pb-5 mt-5 display-3 fonte-secundaria cor-branco texto-sombra">Pratos</h1>
-                </div><!-- col-md -->
-                <div class="col-md-1 cardapios-sessao"><!-- nulo --></div>
-
-                <div class = "col-md p-5 cardapios-sessao">
-                    <!------------------- -->
-                    <div class="row pt-5 mb-1 mt-5">
-                        <div class="col-md-11">
-                            <div class="titulo-cardapio text-center mb-5">
-                                <h1 class = "display-4 fonte-secundaria cor-amarelo">Toros saladas</h1>
-                                <p><img src="<?= BASE_IMG ?>extra/linha-branco.png" width = "200px" ></p>
-                            </div><!-- titulo-cardapio -->                      
-                                <div class="item-cardapio mb-5">
-                                    <h4 class = "cor-branco fonte-secundaria">Salada tropical | R$ 14,90</h4>
-                                    <p class = "cor-cinza italico">Salada de alface com frutas de estação e castanhas, Acompanhada de molho agridoce de vinagre balsâmico e mel.</p>
-                                </div><!-- item cardapio -->
-                                <div class="item-cardapio mb-5">
-                                    <h4 class = "cor-branco fonte-secundaria">Salada crocante | R$ 29,90</h4>
-                                    <p class = "cor-cinza italico">Salada de alface, cenoura, palmito, uva passa, bacon, batata palha, e creme de leite.</p>
-                                </div><!-- item cardapio -->
-                        </div><!-- col-md-->
-                    </div><!-- row -->
-
-                    <!------------------- -->
-                    <div class="row pt-5 mb-1 mt-5">
-                        <div class="col-md-11">
-                            <div class="titulo-cardapio text-center mb-5">
-                                <h1 class = "display-4 fonte-secundaria cor-amarelo">Escondidinho</h1>
-                                <p><img src="<?= BASE_IMG ?>extra/linha-branco.png" width = "200px" ></p>
-                            </div><!-- titulo-cardapio -->                      
-                                <div class="item-cardapio mb-5">
-                                    <h4 class = "cor-branco fonte-secundaria">frango | R$ 24,9</h4>
-                                </div><!-- item cardapio -->
-                                <div class="item-cardapio mb-5">
-                                    <h4 class = "cor-branco fonte-secundaria">Carne Seca | R$ 29,90</h4>
-                                </div><!-- item cardapio -->
-                        </div><!-- col-md-->
-                    </div><!-- row -->
-
-                    <!------------------- -->
-                    <div class="row pt-5 mb-1 mt-5">
-                        <div class="col-md-11">
-                            <div class="titulo-cardapio text-center mb-5">
-                                <h1 class = "display-4 fonte-secundaria cor-amarelo">Toros Gourmet  </h1>
-                                <p><img src="<?= BASE_IMG ?>extra/linha-branco.png" width = "200px" ></p>
-                            </div><!-- titulo-cardapio -->                      
-                                <div class="item-cardapio mb-5">
-                                    <h4 class = "cor-branco fonte-secundaria">Espaguete | R$ 19,00</h4>
-                                    <p class = "cor-cinza italico">Pão, suino filetado, maionese de mostarda, cebola roxa, vinagre e mussarela.</p>
-                                </div><!-- item cardapio -->
-                                <div class="item-cardapio mb-5">
-                                    <h4 class = "cor-branco fonte-secundaria">T frango | R$ 19,90</h4>
-                                    <p class = "cor-cinza italico">Pão, frango filetado, mix de folhas, maionese de rúcula, cheddar e mussarela</p>
-                                </div><!-- item cardapio -->
-                        </div><!-- col-md-->
-                    </div><!-- row -->
-
-                    <div class="row"><div class="col-md  text-right"><p><a href="#cardapios-paginas" class = "botao-topo">	&#65514; VOLTAR AO TOPO</a></p></div><!-- col-md --></div><!-- row -->
-
-
-                </div><!-- col-md -->
-            </div><!-- row -->
-        </div><!-- container -->
-      </section>
-
-      <section id="steak" class = "fundo-sessao-cardapios steak">
-        <div class = "container-fluid">
-            <div class="row">
-                <div class="col-md-4 p-5 ">
-                    <h1 class = "pt-5 pb-5 mt-5 display-3 fonte-secundaria cor-branco texto-sombra">Steak</h1>
-                </div><!-- col-md -->
-                <div class="col-md-1 cardapios-sessao-var"><!-- nulo --></div>
-
-                <div class = "col-md p-5 cardapios-sessao-var">
-                    <!------------------- -->
-                    <div class="row pt-5 mb-1 mt-5">
-                        <div class="col-md-11">
-                            <div class="titulo-cardapio text-center mb-5">
-                                <h1 class = "display-4 fonte-secundaria cor-amarelo">Steakhouse</h1>
-                                <p><img src="<?= BASE_IMG ?>extra/linha-branco.png" width = "200px" ></p>
-                            </div><!-- titulo-cardapio -->                      
-                                <div class="item-cardapio mb-5">
-                                    <h4 class = "cor-branco fonte-secundaria">Denver Steak | R$ 65,90</h4>
-                                    <p class = "cor-cinza italico">Um dos cortes mais apreciados atualmente, conhecido também como Miolo do Acém. </p>
-                                </div><!-- item cardapio -->
-                                <div class="item-cardapio mb-5">
-                                    <h4 class = "cor-branco fonte-secundaria">Prime rib | R$ 98,90</h4>
-                                    <p class = "cor-cinza italico">Uma costela de primeira, extraída entra a sexta e décima costela do boi. Considerada como a parte mais macia e premium da costela.</p>
-                                </div><!-- item cardapio -->
-                        </div><!-- col-md-->
-                    </div><!-- row -->
-
-                    <div class="row"><div class="col-md  text-right"><p><a href="#cardapios-paginas" class = "botao-topo">	&#65514; VOLTAR AO TOPO</a></p></div><!-- col-md --></div><!-- row -->
-
-
-                </div><!-- col-md -->
-            </div><!-- row -->
-        </div><!-- container -->
-      </section>
-
-      <section id="doces" class = "cardapios-sessao fundo-sessao-cardapios doces">
-        <div class = "container-fluid">
-            <div class="row">
-                <div class="col-md-4 p-5 ">
-                    <h1 class = "pt-5 pb-5 mt-5 display-3 fonte-secundaria cor-branco texto-sombra">Doces</h1>
-                </div><!-- col-md -->
-                <div class="col-md-1 cardapios-sessao"><!-- nulo --></div>
-
-                <div class = "col-md p-5 cardapios-sessao">
-                    <!------------------- -->
-                    <div class="row pt-5 mb-1 mt-5">
-                        <div class="col-md-11">
-                            <div class="titulo-cardapio text-center mb-5">
-                                <h1 class = "display-4 fonte-secundaria cor-amarelo">Toro sobremesas</h1>
-                                <p><img src="<?= BASE_IMG ?>extra/linha-branco.png" width = "200px" ></p>
-                            </div><!-- titulo-cardapio -->                      
-                                <div class="item-cardapio mb-5">
-                                    <h4 class = "cor-branco fonte-secundaria">Salada de Frutas au Vin  | R$ 00,00</h4>
-                                </div><!-- item cardapio -->
-                                <div class="item-cardapio mb-5">
-                                    <h4 class = "cor-branco fonte-secundaria">Sorvete de Cachaça  | R$ 00,00</h4>
-                                </div><!-- item cardapio -->
-                        </div><!-- col-md-->
-                    </div><!-- row -->
-                    
                     <div class="row"><div class="col-md  text-right"><p><a href="#cardapios-paginas" class = "botao-topo">	&#65514; VOLTAR AO TOPO</a></p></div><!-- col-md --></div><!-- row -->
 
                 </div><!-- col-md -->
             </div><!-- row -->
         </div><!-- container -->
-      </section>
-  
-
+    </section>
+    <?php endfor; ?>
 
     <!-- corpo do site - fim -->
     <?php require "components/footer.php"; ?>

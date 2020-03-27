@@ -21,14 +21,14 @@
 
 				// Montar SQL
 
-				$atualizar = "UPDATE {$tabela} SET {$valor_coluna} WHERE {$where}";
+				$atualizar = "UPDATE IGNORE {$tabela} SET {$valor_coluna} WHERE {$where}";
 
 			} else {
 				return false;
 			}
 		} else {
 			// Montar SQL
-			$atualizar = "UPDATE {$tabela} SET {$coluna} = '{$valor}' WHERE {$where}";			
+			$atualizar = "UPDATE IGNORE {$tabela} SET {$coluna} = '{$valor}' WHERE {$where}";			
 		}
 
 		// Conectou?
@@ -41,7 +41,7 @@
 				return true;
 			} else {
 				echo $atualizar."<br>";
-				echo "Query inválida!<br>";die (trigger_error());
+				echo "Query inválida!<br>";die (mysqli_connect_errno());
 				return false;
 			}
 		} else {

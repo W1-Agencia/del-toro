@@ -54,7 +54,7 @@ $itemsAllsub = select("mfood", "*", "id","ORDER BY ordenation ASC");
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.css" rel="stylesheet">  
   <link rel="stylesheet" href="require/css/jquery.css">
-  <link rel="stylesheet" href="../require/css/style.css">
+  <link rel="stylesheet" href="<?=BASE?>require/css/style.css">
 </head>
 <body>
   <!-- TOP MENU -->

@@ -22,15 +22,18 @@ if(isset($_GET['i']) && isset($_GET['ac']) && isset($_GET['ob'])) {
 $pageName = "tipo-sub-alimento";
 
 $_GET['id'] ? 
-  $slides = select("mfood", "*", "id=".$_GET['id']) :
+  $sub_categoria = select("mfood", "*", "id=".$_GET['id']) :
   header("Location:tipo-sub-alimento");
 
-if($slides) {
-  $id = $slides[0]['id'];
-  $name = $slides[0]['subalimento'];
-  $ordenation = $slides[0]['ordenation'];
-}
+if($sub_categoria) {
+  $id = $sub_categoria[0]['id'];
+  $name = $sub_categoria[0]['subalimento'];
+  $ordenation = $sub_categoria[0]['ordenation'];
+  $select = $sub_categoria[0]['id_product'];
 
+}
+$items = select("tfood", "*", "ordenation LIKE ".$select."");
+$itemsAll = select("tfood", "*", "id");
 ?>
 
 <!DOCTYPE html>
@@ -45,7 +48,7 @@ if($slides) {
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.css" rel="stylesheet">  
-  <link rel="stylesheet" href="../require/css/style.css">
+  <link rel="stylesheet" href="<?=BASE?>require/css/style.css">
 </head>
 <body>
   <!-- TOP MENU -->
@@ -82,7 +85,22 @@ if($slides) {
     <form id="form-quartos-edit" action="../actions/<?=$pageName?>" class="row form-validate" method="post" enctype="multipart/form-data">
       <input type="hidden" name="action" value="edit">
       <input type="hidden" name="id" value="<?= $id ?> ">
-      <input type="hidden" name="ordenation" value="<?= $ordenation ?> ">
+
+      <div class="form-group col-md-4">
+        <label for="inputState">Selecione a sub categoria de alimento</label>
+          <select id="inputState" class="form-control" name='options'>
+            <?php if($subselect == $sub[0]['ordenation']){ ?>
+                <option select><?=$sub[0]['subalimento'];?></option>
+                <?php for($i=0; $i < count($itemsAllsub); $i++) :?>
+                  <option value="<?php $itemsAllsub[$i]['ordenation']?>"><?=$itemsAllsub[$i]['subalimento']?></option>
+                <?php endfor; ?>
+              <?php }else{ ?>
+                <option selected>Selecione ...</option>
+                <?php for($i=0; $i < count($itemsAllsub); $i++) :?>
+                  <option value="<?php $itemsAllsub[$i]['ordenation']?>"><?=$itemsAllsub[$i]['subalimento']?></option>
+                <?php endfor; ?>
+              <?php } ?>
+          </select>>
 
       <div class="form-group col-md-4">
         <label for="name">Titulo*</label>
@@ -90,7 +108,10 @@ if($slides) {
       </div>
 
       <div class="w-100"></div>
-
+      <div class="form-group col-md-3">
+        <label for="position">Ordem de apresentação*</label>
+        <input type="text" class="form-control" name="ordenation" value="<?= $ordenation?>">
+      </div> 
 
       <ul class="form-group col-md-12 container-error"></ul>   
 

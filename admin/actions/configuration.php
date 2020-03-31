@@ -1,12 +1,12 @@
 <?php
 
-require_once '../../connection/connection.php';
-require_once '../../connection/close_connection.php';
-require_once '../require/functions/insert.php';
-require_once '../require/functions/select.php';
-require_once '../require/functions/update.php';
-require_once '../require/functions/delete.php';
-require_once '../require/functions/files.php';
+require_once './connection/connection.php';
+require_once './connection/close_connection.php';
+require_once 'require/functions/insert.php';
+require_once 'require/functions/select.php';
+require_once 'require/functions/update.php';
+require_once 'require/functions/delete.php';
+require_once 'require/functions/files.php';
 
 setlocale(LC_ALL,'pt_BR.UTF8');
 mb_internal_encoding('UTF8'); 
@@ -41,9 +41,9 @@ if(isset($_POST['action'])) {
 
     // Return
     if($return) {
-      header("Location:../".$namePage.".php?i=scs&ac=add&ob=".$object);
+      header("Location:".BASE.$namePage."");
     } else {
-      header("Location:../".$namePage.".php?i=err&ac=add&ob=".$object);
+      header("Location:".BASE.$namePage."");
     }
 
   }
@@ -90,15 +90,15 @@ if(isset($_POST['action'])) {
     );
 
     if($return) {
-      header("Location:../".$namePage.".php?i=scs&ac=edit&ob=".$object);
+      header("Location:".BASE.$namePage."");
     } else {
-      header("Location:../".$namePage.".php?i=err&ac=edit&ob=".$object);
+      header("Location:".BASE.$namePage."");
     }
 
   }
 
 } else {
 
-  header("Location:../".$namePage.".php");
+  header("Location:".BASE.$namePage."");
   
 }

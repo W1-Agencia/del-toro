@@ -72,20 +72,16 @@ $sub = select("mfood","*", "id", "ORDER BY ordenation ASC")
     <!-- FORM ADD -->
     <form class="row form-validate" action="<?=BASE?>actions/<?=$pageName?>" method="POST">
       <input type="hidden" name="action" value="add">
+      
+      <div class="form-group col-md-6">
+        <label for="name">Nome do prato*</label>
+        <input type="text" class="form-control" id="name" name="name">
+      </div>
+
+      <div class="w-100"></div>
+
       <div class="form-group col-md-4">
         <label for="inputState">Categoria de alimentos</label>
-        <select id="inputState" class="form-control" name='options'>
-          <option selected>Selecione...</option>
-          <?php for($i=0; $i < count($items); $i++) :?>
-          <option value='<?=$items[$i]['ordenation']?>'>
-            <?=$items[$i]['alimento']?>
-          </option>
-          <?php endfor; ?>
-        </select>
-      </div>
-      
-      <div class="form-group col-md-4">
-        <label for="inputState">Sub-categoria de alimentos</label>
         <select id="inputState" class="form-control" name='optionssub'>
           <option selected>Selecione...</option>
           <?php for($i=0; $i < count($sub); $i++) :?>
@@ -98,10 +94,7 @@ $sub = select("mfood","*", "id", "ORDER BY ordenation ASC")
 
       <div class="w-100"></div>
 
-      <div class="form-group col-md-6">
-        <label for="name">Nome do prato*</label>
-        <input type="text" class="form-control" id="name" name="name">
-      </div>
+      
 
       <div class="form-group col-md-12">
         <label for="text">Ingredientes do prato*</label>

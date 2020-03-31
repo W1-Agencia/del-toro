@@ -1,16 +1,15 @@
 <?php 
 session_start();
 
-include_once './connection/connection.php';
-include_once './connection/close_connection.php';
-include_once 'require/functions/select.php';
-include_once 'require/functions/insert.php';
-$namePage = 'admin';
+include_once '../../connection/connection.php';
+include_once '../../connection/close_connection.php';
+include_once '../../require/functions/select.php';
 
 if(isset($_POST['user']) 
   && isset($_POST['password'])
   && $_POST['user'] != ""
   && $_POST['password'] != "") {
+
   $user = $_POST['user']; 
   $password = $_POST['password'];
 
@@ -20,18 +19,18 @@ if(isset($_POST['user'])
     header("Location:/".'login'."");
 
   } elseif(!empty($user) && !empty($password)) {
+
     $return = select("admin", "*", "email='".$user."' AND password='".md5($password)."'");
 
     if(!$return) {
 
       $_SESSION['log'] = 'invalid'; 
-      header("Location:".BASE."");
+      header("Location:../");
 
     } elseif($return) {
 
       $_SESSION['user'] = $user;
-      header("Location:".BASE."");
-      
+      header("Location: ../");      
     }
 
   }

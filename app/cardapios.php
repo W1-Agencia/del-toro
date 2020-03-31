@@ -62,7 +62,7 @@
         $subcategoria = select("mfood","*","id_categoria = ".$categoria[$i]['ordenation']);
       ?>
             
-      <section id="petiscos" class = " fundo-sessao-cardapios <?=strtolower($categoria[$i]['alimento'])?>">
+      <section id="<?=strtolower($categoria[$i]['alimento'])?>" class = " fundo-sessao-cardapios <?=strtolower($categoria[$i]['alimento'])?>">
         <div class = "container-fluid">
             <div class="row">
             
@@ -82,22 +82,20 @@
                     <div class="row pt-5 mb-1 mt-5">
                         <div class="col-md-11">
                             <?php 
-                                $cardapio = select("menu","*","sub_id_product = ".$subcategoria[$j]['ordenation']);
+                                $cardapio = select("menu","*","sub_id_product=".$subcategoria[$j]['ordenation']);
                                 //$searchColumn = array_column($cardapio,'id_categoria');
                                 //$products = array_search($subcategoria[$j]['ordenation'], $searchColumn);
                             ?>
-                            
                             <div class="titulo-cardapio text-center mb-5">
-                                <h1 class = "display-4 fonte-secundaria cor-amarelo"><?= $subcategoria[$j]['subalimento'] ?></h1>
+                                <h1 class = "display-4 fonte-secundaria cor-amarelo"><?=$subcategoria[$j]['subalimento'] ?></h1>
                                 <p><img src="<?= BASE_IMG ?>extra/linha-branco.png" width = "200px" ></p>
                             </div><!-- titulo-cardapio -->  
-
                             <?php 
                             if($cardapio) :
                                 foreach($cardapio as  $item): ?>
-                            <div class="item-cardapio mb-5">
-                                <h4 class = "cor-branco fonte-secundaria"><?=$item['name_product']?> | R$ <?=$item['value_product']?></h4>
-                                <p class = "cor-cinza italico"><?=$item['description_product']?></p>
+                                    <div class="item-cardapio mb-5">
+                                    <h4 class = "cor-branco fonte-secundaria"><?=$item['name_product']?> | R$ <?=$item['value_product']?></h4>
+                                    <p class = "cor-cinza italico"><?=$item['description_product']?></p>
                             </div>
                             <?php 
                                 endforeach; 

@@ -24,8 +24,8 @@ if(isset($_POST['action'])) {
     $value = number_format($real,2,'.',',');
       // INSERT
       $return = insert(
-        array('id_product', 'sub_id_product', 'name_product', 'description_product','value_product', 'ordenation'), 
-        array($_POST['options'], $_POST['optionssub'], $_POST['name'], $_POST['text'], $value, $ordenation),
+        array('sub_id_product', 'name_product', 'description_product','value_product', 'ordenation'), 
+        array($_POST['optionssub'], $_POST['name'], $_POST['text'], $value, $ordenation),
         $nameTable
       );
 
@@ -39,9 +39,9 @@ if(isset($_POST['action'])) {
 
   // EDIT
   elseif($_POST['action'] == 'edit') {
+    print_r($_POST);
     // VALUES - POST
     $id = $_POST['id'];
-    $opcao = $_POST['options'];
     $opcaosub = $_POST['optionssub'];
     $title = $_POST['title'];
     $text = $_POST['text']; 
@@ -57,21 +57,22 @@ if(isset($_POST['action'])) {
     $item['name_product'] = ($title != $item['name_product']) ? $title : $item['name_product'];
     $item['description_product'] = ($text != $item['description_product']) ? $text : $item['description_product'];
     $item['value_product'] = ($valor != $item['value_product']) ? $valor : $item['value_product']; 
+    $item['sub_id_product'] = ($opcaosub != $item['sub_id_product']) ? $opcaosub : $item['sub_id_product']; 
     $item['ordenation'] = ordenation($ordenation, $item['ordenation'], $allItems, $nameTable);
 
     // UPDATE
     $return = update(
       array(
         'name_product',
-        'id_product',
-        'sub_id_product',
         'description_product',
+        'sub_id_product',
         'value_product',
         'ordenation'
       ), 
       array(
         $item['name_product'], 
         $item['description_product'], 
+        $item['sub_id_product'],
         $item['value_product'],
         $item['ordenation']
       ), 

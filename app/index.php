@@ -44,7 +44,7 @@
                             <div class="row mt-5 pt-5">
                                 <div class="col-md mt-5 pt-5 ">
                                     <h1 class = "display-1 fonte-secundaria cor-amarelo"><?=$slides[$i]['title']?></h1>
-                                    <h2 class = "cor-branco"><?=$slides[$i]['text']?>l</h2>
+                                    <h2 class = "cor-branco"><?=$slides[$i]['text']?></h2>
                                     <p class = "mt-5"><a href="<?= BASE ?>cardapios" class = "botao-principal">VER CARDÁPIOS</a></p>
                                 </div><!-- col-md -->
                             </div><!-- row -->
@@ -189,17 +189,17 @@
                                     <div  class="owl-carousel owl-theme">
                                         <div class="item">
                                             <a data-fancybox="gallery" href="<?= BASE_IMG ?>/fotos-local/15430012785bf854be7a321.png">
-                                                <div class = "foto-sobre-item" style = "background-image: url(<?= BASE_IMG ?>/fotos-local/15430012785bf854be7a321.png);"></div>
+                                                <div class = "foto-sobre-item" style = "background-image: url(<?= BASE_IMG ?>fotos-local/15430012785bf854be7a321.png);"></div>
                                             </a>
                                         </div><!-- item -->
                                         <div class="item">
                                             <a data-fancybox="gallery" href="<?= BASE_IMG ?>/fotos-local/15657253695d5312b98a115.png">
-                                                <div class = "foto-sobre-item" style = "background-image: url(<?= BASE_IMG ?>/fotos-local/15657253695d5312b98a115.png);"></div>
+                                                <div class = "foto-sobre-item" style = "background-image: url(<?= BASE_IMG ?>fotos-local/15657253695d5312b98a115.png);"></div>
                                             </a>
                                         </div><!-- item -->
                                         <div class="item">
                                             <a data-fancybox="gallery" href="<?= BASE_IMG ?>/fotos-local/147454864257e3d3a299472.png">
-                                                <div class = "foto-sobre-item" style = "background-image: url(<?= BASE_IMG ?>/fotos-local/147454864257e3d3a299472.png);"></div>
+                                                <div class = "foto-sobre-item" style = "background-image: url(<?= BASE_IMG ?>fotos-local/147454864257e3d3a299472.png);"></div>
                                             </a>
                                         </div><!-- item -->
                                     </div><!-- owl-carousel -->

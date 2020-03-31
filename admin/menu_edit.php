@@ -30,14 +30,12 @@ if($menu) {
   $name = $menu[0]['name_product'];
   $text = $menu[0]['description_product'];
   $value = number_format($menu[0]['value_product'],2,',','.');
-  $select = $menu[0]['id_product'];
   $subselect = $menu[0]['sub_id_product'];
 
 }
-$items = select("tfood", "*", "ordenation LIKE ".$select."");
-$itemsAll = select("tfood", "*", "id","ORDER BY ordenation ASC");
-$sub = select("mfood", "*", "ordenation LIKE ".$subselect."");
-$itemsAllsub = select("mfood", "*", "id","ORDER BY ordenation ASC");
+$itemsAll = select("tfood", "*", "id");
+$sub = select("mfood", "*", "ordenation=".$subselect."");
+$itemsAllsub = select("mfood", "*", "id");
 
 ?>
 
@@ -93,31 +91,19 @@ $itemsAllsub = select("mfood", "*", "id","ORDER BY ordenation ASC");
       <input type="hidden" name="id" value="<?= $id ?> ">
 
       <div class="form-group col-md-4">
-        <label for="inputState">Selecione a categoria de alimento</label>
-          <select id="inputState" class="form-control" name='options'>
-            <?php if($select == $items[0]['ordenation']){ ?>
-                <option select><?=$items[0]['alimento'];?></option>
-                <?php for($i=0; $i < count($itemsAll); $i++) :?>
-                  <option value="<?php $itemsAll[$i]['ordenation']?>"><?=$itemsAll[$i]['alimento']?></option>
-                <?php endfor; ?>
-              <?php } ?>
-          </select>
-      </div>
-
-      <div class="form-group col-md-4">
         <label for="inputState">Selecione a sub categoria de alimento</label>
-          <select id="inputState" class="form-control" name='optionssub'>
-            <?php if($subselect == $sub[0]['ordenation']){ ?>
-                <option select><?=$sub[0]['subalimento'];?></option>
+        <select id="inputState" class="form-control" name='optionssub'>
+            <?php if($subselect == $sub): ?>
+                <option select><?=$name?></option>
                 <?php for($i=0; $i < count($itemsAllsub); $i++) :?>
-                  <option value="<?php $itemsAllsub[$i]['ordenation']?>"><?=$itemsAllsub[$i]['subalimento']?></option>
+                  <option value="<?=$itemsAllsub[$i]['ordenation']?>"><?=$itemsAllsub[$i]['subalimento']?></option>
                 <?php endfor; ?>
-              <?php }else{ ?>
-                <option selected>Selecione ...</option>
-                <?php for($i=0; $i < count($itemsAllsub); $i++) :?>
-                  <option value="<?php $itemsAllsub[$i]['ordenation']?>"><?=$itemsAllsub[$i]['subalimento']?></option>
-                <?php endfor; ?>
-              <?php } ?>
+            <?php endif;?>
+            <?php if($subselect != $sub) : ?>
+              <?php for($i=0; $i < count($itemsAllsub); $i++) :?>
+                    <option value="<?=$itemsAllsub[$i]['ordenation']?>"><?=$itemsAllsub[$i]['subalimento']?></option>
+              <?php endfor; ?>
+            <?php endif;?>
           </select>
       </div>
 

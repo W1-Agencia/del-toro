@@ -104,7 +104,7 @@ if($promotions) {
       
       <div class="form-group col-md-6">
         <label for="name">Preço*</label>
-        <input type="text" class="form-control" id="value" name="value" value="<?=$value?>">
+        <input type="text" class="form-control" id="value" name="value" value="<?= number_format($value,2,',','.') ?>">
       </div>
 
       <div class="form-group col-md-3">
@@ -124,7 +124,7 @@ if($promotions) {
               <div class="form-group col-md-6">
                 <label>Imagem atual*</label>
                 <div class="form-control">
-                  <img class="img-news-edit img-fluid" src="require/img/promotions/<?= $images ?>" alt="Imagem não encontrado">
+                  <img class="img-news-edit img-fluid" src="<?=BASE?>require/img/promotions/<?= $images ?>" alt="Imagem não encontrado">
                 </div>
               </div>
               <?php endif; ?>
@@ -142,7 +142,7 @@ if($promotions) {
 
     <div class="form-group col-md-3">
         <label for="position">Ordem de apresentação*</label>
-        <input type="text" class="form-control" name="ordenation" value="<?= number_format($promotions[0]['ordenation'],2,',','.') ?>">
+        <input type="text" class="form-control" name="ordenation" value="<?= $ordenation?>">
       </div> 
 
       <ul class="form-group col-md-12 container-error"></ul>   

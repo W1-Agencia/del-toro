@@ -61,7 +61,7 @@ $countPage = $countItems / $rows;
     <div class="row">
       <div class="col-md-12">
         <h2>Tipo de sub-categorias alimentos</h2>
-        <small>Publique os tipos de comida que deseja seus clientes vejam.</small>
+        <small>Publique os tipos de comida que deseja que seus clientes vejam.</small>
       </div>
     </div>
     <!-- END - TITLE -->
@@ -165,7 +165,7 @@ $countPage = $countItems / $rows;
           <p>Deseja realmente remover este <b>Tipo de alimento</b>?</p>
         </div>
 
-        <form method="POST" action="<?=BASE?>tipo-sub-alimento-delete?<?=$page ?>" class="modal-footer form-remove">
+        <form method="POST" action="<?=BASE?>tipo-sub-alimento-delete" class="modal-footer form-remove">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
           <button type="submit" id="btn-confirm-remove" class="btn btn-danger">Sim</button>
           <input type="hidden" name="action" value="remove">

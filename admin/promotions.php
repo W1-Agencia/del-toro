@@ -102,7 +102,7 @@ $countPage = $countItems / $rows;
 
               <td><img class="img-fluid img-table" src="require/img/promotions/<?=$items[$i]['namedir']?>" /></td>
 
-              <td><?= number_format($items[$i]['value_prod'],2,',','.') ?> R$</td>
+              <td>R$ <?= number_format($items[$i]['value_prod'],2,',','.') ?> </td>
 
             <td class="col-actions">
             <form action="<?= BASE ?>promocoes-editar?<?= $items[$i]['id']?>" method="GET" ></form>
@@ -158,14 +158,14 @@ $countPage = $countItems / $rows;
       <div class="modal-content">
 
         <div class="modal-header">
-          <h5 class="modal-title" id="smallmodalLabel">Remover slide</h5>
+          <h5 class="modal-title" id="smallmodalLabel">Remover essa promoção</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
           </button>
         </div>
 
         <div class="modal-body">
-          <p>Deseja realmente remover este <b>slide</b>?</p>
+          <p>Deseja realmente remover esta <b>promoção</b>?</p>
         </div>
 
         <form method="POST" action="<?=$pageName?>-delete" class="modal-footer form-remove">

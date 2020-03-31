@@ -22,13 +22,13 @@ if(isset($_GET['i']) && isset($_GET['ac']) && isset($_GET['ob'])) {
 $pageName = "tipo-alimento";
 
 $_GET['id'] ? 
-  $slides = select("tfood", "*", "id=".$_GET['id']) :
+  $cardapio = select("tfood", "*", "id=".$_GET['id']) :
   header("Location:tipo-alimento");
 
-if($slides) {
-  $id = $slides[0]['id'];
-  $name = $slides[0]['alimento'];
-  $ordenation = $slides[0]['ordenation'];
+if($cardapio) {
+  $id = $cardapio[0]['id'];
+  $name = $cardapio[0]['alimento'];
+  $ordenation = $cardapio[0]['ordenation'];
 }
 
 ?>
@@ -57,7 +57,7 @@ if($slides) {
     <!-- TITLE -->
     <div class="row mb-2">
       <div class="col-md-12">
-        <h3>Editar Tipo de alimento</h3>
+        <h3>Editar os Tipos de alimento</h3>
         <small>Edite os tipos de alimentos que você publicou.</small>
       </div>
     </div>

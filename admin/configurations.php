@@ -57,7 +57,7 @@ $item = select("configuration", "*", "id", "ORDER BY id");
 
     <hr>
 
-    <form id="form" class="row" action="actions/configuracao" method="post">
+    <form id="form" class="row" action="../actions/configuration" method="post">
       <?php if($item): ?>
       <input type="hidden" name="id" value="<?= $item[0]['id'] ?>">
       <?php endif; ?>

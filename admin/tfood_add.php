@@ -42,7 +42,7 @@ $pageName = "tipo-alimento";
     <!-- TITLE -->
     <div class="row mb-2">
       <div class="col-md-12">
-        <h2>Novo Tipo de alimento</h2>  
+        <h2>Novos Tipos de alimento</h2>  
         <small>Publique os tipos de alimentos que você deseja expor aos seus clientes.</small>
       </div>
     </div>
@@ -53,7 +53,7 @@ $pageName = "tipo-alimento";
       <div class="col-md-12">
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="<?=$pageName?>">Tipo de alimentos</a></li>
+            <li class="breadcrumb-item"><a href="<?=$pageName?>">Tipos de alimento</a></li>
             <li class="breadcrumb-item active" aria-current="page">Novo</li>
           </ol>
         </nav>

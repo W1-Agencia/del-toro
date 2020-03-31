@@ -7,11 +7,11 @@ if(!defined('BASE_W1')){
 
 if(!defined('BASE')){
   define('BASE','http://localhost:8080/del-toro/admin/');
-  // define('BASE','http://w1agencia.com.br/demos/deltoro/');  
+  // define('BASE','http://w1agencia.com.br/demos/deltoro/admin/');  
 }
 if(!defined('BASE_APP')){
   define('BASE_APP','http://localhost:8080/del-toro/');
-  // define('BASE','http://w1agencia.com.br/demos/deltoro/');  
+  // define('BASE_APP','http://w1agencia.com.br/demos/deltoro/');  
 }
 
 if(!defined('BASE_IMG')){
@@ -32,7 +32,7 @@ if(!defined('BASE_JS')){
 
 if(!defined('PROJECT_DIR'))
   define('PROJECT_DIR', 'del-toro/admin');
-  // define('PROJECT_DIR', 'demos/deltoro');
+  // define('PROJECT_DIR', 'demos/deltoro/admin');
 
 if(!defined('APPLICATION_DIR'))
   define('APPLICATION_DIR', 'admin');

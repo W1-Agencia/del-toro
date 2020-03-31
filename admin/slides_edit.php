@@ -152,5 +152,6 @@ if($slides) {
   <script src="require/js/editor.js"></script>
   <script src="require/js/index.js"></script>
   <script src="require/js/validate.js"></script> 
+
 </body>
 </html>

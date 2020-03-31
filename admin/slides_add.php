@@ -26,6 +26,7 @@ $pageName = "slides";
   <title>Painel Administrativo</title>
 
   <link rel="icon" href="favicon.png">
+  
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.css" rel="stylesheet">  
@@ -107,5 +108,7 @@ $pageName = "slides";
   <script src="require/js/editor.js"></script>
   <script src="require/js/index.js"></script>
   <script src="require/js/validate.js"></script>
+  <script src="require/js/jquery.js"></script>
+  <script src="require/js/bootstrap.min.js"></script>
 </body>
 </html>

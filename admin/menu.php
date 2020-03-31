@@ -17,8 +17,6 @@ if(isset($_GET['i']) && isset($_GET['ac']) && isset($_GET['ob'])) {
   $respAction = "";
   $respOb = "";
 }
-
-// SETS
 $pageName = "cardapios";
 
 $rows = 10;
@@ -82,13 +80,12 @@ $countPage = $countItems / $rows;
         <?php if($items) : ?>
         <table class="table table-condensed table-striped table-hover table-admin">
 
-          <caption>Listando <?= count($items) ?> Slide(s) de <?=$countItems?>.</caption>
+          <caption>Listando <?= count($items) ?> cardapios(s) de <?=$countItems?>.</caption>
 
           <thead>
             <tr>
               <th>Ordem</th>
               <th>Nome da Comida</th>
-              <th>Categoria da Comida</th>
               <th>Valor</th>
               <th class="col-actions">Ações</th>
             </tr>
@@ -100,8 +97,7 @@ $countPage = $countItems / $rows;
               <td><?= $items[$i]['ordenation'] ?></td>
 
               <td><?= $items[$i]['name_product'] ?></td>
-              <td><?= $items[$i]['id_product'] ?></td>
-              <td><?= number_format($items[$i]['value_product'],2,',','.') ?></td>
+              <td>R$ <?= number_format($items[$i]['value_product'],2,',','.') ?></td>
 
             <td class="col-actions">
             <form action="<?= BASE ?><?=$pageName?>-editar?<?= $items[$i]['id']?>" method="GET" ></form>
@@ -109,7 +105,7 @@ $countPage = $countItems / $rows;
                   <i class="far fa-edit"></i>
                 </a>
                 <span id="popover" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="excluir">
-                  <a class="link-action-remove" href="<?=BASE?>cardapios-delete" data-toggle="modal" data-target="#removemodal">
+                  <a class="link-action-remove" href="#" data-toggle="modal" data-target="#removemodal">
                     <i class="fas fa-trash"></i>
                   </a>
                 </span>
@@ -152,31 +148,30 @@ $countPage = $countItems / $rows;
   </div>
 
   <!-- MODAL REMOVE -->
-  <form method="POST" action="<?=BASE?>cardapios-delete" class="modal-footer form-remove">
   <div class="modal fade" id="removemodal" tabindex="-1" role="dialog" aria-labelledby="smallmodalLabel" aria-hidden="true">
     <div class="modal-dialog modal-sm" role="document">
       <div class="modal-content">
-
         <div class="modal-header">
-          <h5 class="modal-title" id="smallmodalLabel">Remover slide</h5>
+          <h5 class="modal-title" id="smallmodalLabel">Remover cardapio</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
           </button>
         </div>
-
         <div class="modal-body">
-          <p>Deseja realmente remover este <b>slide</b>?</p>
+          <p>Deseja realmente remover este <b>elemento do cardapio</b>?</p>
         </div>
 
+        <form method="POST" action="<?=$pageName?>-delete" class="modal-footer form-remove">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
           <button type="submit" id="btn-confirm-remove" class="btn btn-danger">Sim</button>
           <input type="hidden" name="action" value="remove">
           <input type="hidden" name="id" id="id">
         </form>
-
+        
       </div>
     </div>
   </div>
+
   <!-- END - MODAL REMOVE -->
 
   <!-- NOTIFICATION -->

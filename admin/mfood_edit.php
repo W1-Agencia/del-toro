@@ -29,11 +29,11 @@ if($sub_categoria) {
   $id = $sub_categoria[0]['id'];
   $name = $sub_categoria[0]['subalimento'];
   $ordenation = $sub_categoria[0]['ordenation'];
-  $select = $sub_categoria[0]['id_product'];
+  $select = $sub_categoria[0]['id_categoria'];
 
 }
-$items = select("tfood", "*", "ordenation LIKE ".$select."");
-$itemsAll = select("tfood", "*", "id");
+$items = select("tfood", "*", "ordenation ".$select."");
+$itemsAllsub = select("tfood", "*", "id");
 ?>
 
 <!DOCTYPE html>
@@ -86,23 +86,23 @@ $itemsAll = select("tfood", "*", "id");
       <input type="hidden" name="action" value="edit">
       <input type="hidden" name="id" value="<?= $id ?> ">
 
-      <div class="form-group col-md-4">
+      <div class="form-group col-md-8">
         <label for="inputState">Selecione a sub categoria de alimento</label>
           <select id="inputState" class="form-control" name='options'>
-            <?php if($subselect == $sub[0]['ordenation']){ ?>
-                <option select><?=$sub[0]['subalimento'];?></option>
+            <?php if($select == $items): ?>
+                <option select><?=$name?></option>
                 <?php for($i=0; $i < count($itemsAllsub); $i++) :?>
-                  <option value="<?php $itemsAllsub[$i]['ordenation']?>"><?=$itemsAllsub[$i]['subalimento']?></option>
+                  <option value="<?=$itemsAllsub[$i]['ordenation']?>"><?=$itemsAllsub[$i]['alimento']?></option>
                 <?php endfor; ?>
-              <?php }else{ ?>
-                <option selected>Selecione ...</option>
-                <?php for($i=0; $i < count($itemsAllsub); $i++) :?>
-                  <option value="<?php $itemsAllsub[$i]['ordenation']?>"><?=$itemsAllsub[$i]['subalimento']?></option>
-                <?php endfor; ?>
-              <?php } ?>
-          </select>>
-
-      <div class="form-group col-md-4">
+            <?php endif;?>
+            <?php if($select != $items): ?>
+              <?php for($i=0; $i < count($itemsAllsub); $i++) :?>
+                    <option value="<?=$itemsAllsub[$i]['ordenation']?>"><?=$itemsAllsub[$i]['alimento']?></option>
+              <?php endfor; ?>
+            <?php endif; ?>
+          </select>
+      </div>
+      <div class="form-group col-md-8">
         <label for="name">Titulo*</label>
         <input type="text" class="form-control" id="name" name="title" value="<?= $name ?>">
       </div>

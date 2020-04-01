@@ -19,7 +19,7 @@
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
           <a class="dropdown-item" href="<?=BASE?>tipo-alimento"><i class="far fa-bookmark"></i> Categorias de alimentos</a>
-          <a class="dropdown-item" href="<?=BASE?>tipo-sub-alimento"><i class="far fa-bookmark"></i> Sub-Categoria de cardápio</a>
+          <a class="dropdown-item" href="<?=BASE?>tipo-sub-alimento"><i class="far fa-bookmark"></i> Categorias do cardápio</a>
           <a class="dropdown-item" href="<?=BASE?>cardapios">Cardápios</a>
         </div>
       </div>

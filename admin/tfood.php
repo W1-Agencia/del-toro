@@ -71,7 +71,7 @@ $countPage = $countItems / $rows;
     <!-- BTN ADD -->
     <div class="row content-link-add-admin">
       <div class="col-md-12">
-        <a href="<?=$pageName?>-adicionar" class="btn btn-success"><i class="fas fa-plus"></i> Novo Tipo de alimento</a>
+        <a href="<?=$pageName?>-adicionar" class="btn btn-success"><i class="fas fa-plus"></i> Nova categoria do cardápio</a>
       </div>
     </div>
     <!-- END - BTN ADD -->
@@ -86,7 +86,7 @@ $countPage = $countItems / $rows;
 
           <thead>
             <tr>
-              <th class="col-actions">Categoria alimento</th>
+              <th class="col-actions">Categorias do cardápio</th>
               <th class="col-actions">Valor Categoria</th>
               <th class="col-actions">Ações</th>
             </tr>

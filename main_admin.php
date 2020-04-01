@@ -16,8 +16,6 @@ $urlpatterns = array(
     '/actions/slides' => 'actions/slides.php',
 
     '/actions/login' => 'actions/login.php',
-    '/actions/configuracoes' => 'actions/configuration.php',
-
     '/tipo-alimento' => 'tfood.php',
     '/tipo-alimento/(?P<page>\S+)' => 'tfood.php',
     '/tipo-alimento-adicionar' => 'tfood_add.php',
@@ -50,6 +48,7 @@ $urlpatterns = array(
     '/promocoes-editar/(?P<id>\S+)' => 'promotions_edit.php',
     '/actions/promocoes' => 'actions/promotions.php',
 
+    '/actions/configuracoes' => 'actions/configuration.php',
 
 );
 url_response1($urlpatterns);

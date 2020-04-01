@@ -28,8 +28,13 @@ $page = isset($_GET['page']) ? $_GET['page'] : "";
 $start_page = $pageCurrent - 1;
 $start_page = $start_page * $rows;
 
-$items = select("mfood", "*", "id", "ORDER BY ordenation ASC", "LIMIT $start_page, $rows");
-$itemsAll = select("mfood", "*", "id", "ORDER BY ordenation ASC");
+// id do mfood
+// nome do mfood
+// nome do tfood
+$items = select("mfood INNER JOIN tfood ON mfood.id_categoria = tfood.ordenation", 
+                "mfood.id AS id, mfood.subalimento AS subalimento, tfood.alimento AS alimento, mfood.ordenation AS ordenation", 
+                "mfood.id", "ORDER BY mfood.ordenation ASC", "LIMIT $start_page, $rows");
+$itemsAll = select("mfood INNER JOIN tfood ON mfood.id_categoria = tfood.ordenation", "*", "mfood.id", "ORDER BY mfood.ordenation ASC");
 
 $countItems = ($itemsAll ? count($itemsAll) : "0");
 $countPage = $countItems / $rows;
@@ -60,7 +65,7 @@ $countPage = $countItems / $rows;
     <!-- TITLE -->
     <div class="row">
       <div class="col-md-12">
-        <h2>Tipo de sub-categorias alimentos</h2>
+        <h2>Categorias do cardápio</h2>
         <small>Publique os tipos de comida que deseja que seus clientes vejam.</small>
       </div>
     </div>
@@ -71,7 +76,7 @@ $countPage = $countItems / $rows;
     <!-- BTN ADD -->
     <div class="row content-link-add-admin">
       <div class="col-md-12">
-        <a href="<?=$pageName?>-adicionar" class="btn btn-success"><i class="fas fa-plus"></i> Novo Tipo de alimento</a>
+        <a href="<?=$pageName?>-adicionar" class="btn btn-success"><i class="fas fa-plus"></i> Nova categoria do cardápio</a>
       </div>
     </div>
     <!-- END - BTN ADD -->
@@ -86,8 +91,8 @@ $countPage = $countItems / $rows;
 
           <thead>
             <tr>
-              <th class="col-actions">Categoria alimento</th>
-              <th class="col-actions">Valor Categoria</th>
+              <th class="col-actions">Categorias do cardápio</th>
+              <th class="col-actions">Tipo de alimento</th>
               <th class="col-actions">Ações</th>
             </tr>
           </thead>
@@ -95,9 +100,8 @@ $countPage = $countItems / $rows;
           <tbody>
             <?php for($i = 0; $i < count($items); $i++) : ?>
             <tr id="<?= $items[$i]['id'] ?>">
-
-              <td><?= $items[$i]['subalimento'] ?></td>
-              <td><?=$items[$i]['ordenation']?></td>
+            <td><?= $items[$i]['subalimento']?></td>
+            <td><?= $items[$i]['alimento']?></td>
 
 
             <td class="col-actions">

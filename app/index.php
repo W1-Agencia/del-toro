@@ -5,6 +5,7 @@
     $items = select("promotions","*","id");
     $configuration = select("configuration","*","id");
     $slides = select("slide","*","id");
+    
 
 ?>
 <!doctype html>
@@ -38,19 +39,18 @@
       <section id="slide">
           <div class = "container-fluid pt-5 pb-5 text-center slide-img" id = "">
                 <div  class="owl-carousel owl-theme">
+                    <?php for($i = 0;$i < count($slides); $i ++) : ?>
                     <div class="item">
                         <!-- item de slide -->
-                        <?php for($i = 0;$i < count($slides); $i ++) : ?>
-                            <div class="row mt-5 pt-5">
-                                <div class="col-md mt-5 pt-5 ">
-                                    <h1 class = "display-1 fonte-secundaria cor-amarelo"><?=$slides[$i]['title']?></h1>
-                                    <h2 class = "cor-branco"><?=$slides[$i]['text']?></h2>
-                                    <p class = "mt-5"><a href="<?= BASE ?>cardapios" class = "botao-principal">VER CARDÁPIOS</a></p>
-                                </div><!-- col-md -->
-                            </div><!-- row -->
-                            <?php endfor;?>
-
+                        <div class="row mt-5 pt-5">
+                            <div class="col-md mt-5 pt-5 ">
+                                <h1 class = "display-1 fonte-secundaria cor-amarelo"><?=$slides[$i]['title']?></h1>
+                                <h2 class = "cor-branco"><?=$slides[$i]['text']?></h2>
+                                <p class = "mt-5"><a href="<?= BASE ?>cardapios" class = "botao-principal">VER CARDÁPIOS</a></p>
+                            </div><!-- col-md -->
+                        </div><!-- row -->
                     </div><!-- item -->
+                    <?php endfor;?>
                 </div><!-- owl-carousel -->
                 <div class="owl-theme"><div class="owl-controls"><div class="custom-nav owl-nav"></div></div>
 
@@ -129,7 +129,7 @@
             <div class="row pt-5 pb-5">
                 <div class="col-md-5 mb-5 text-left cor-preto">
                     <h5 class = "cor-preto">
-                        A Del’Toro Hamburgueria Steak House Artesanal surgriu da união entre o conhecimento e o querer oferecer uma experiência especial a quem mora ou visita a fronteira mais integrada do mundo.  
+                        <?=$configuration[0]['text']?>
                     </h5>
                     <p class = "mt-5"><a href="#" class = "botao-terceiro" data-toggle="modal" data-target="#modalSobre">LEIA MAIS</a></p>
                 </div><!-- col-md -->

@@ -26,11 +26,15 @@ $page = isset($_GET['page']) ? $_GET['page'] : "";
 $start_page = $pageCurrent - 1;
 $start_page = $start_page * $rows;
 
-$items = select("menu", "*", "id", "ORDER BY ordenation ASC", "LIMIT $start_page, $rows");
-$itemsAll = select("menu", "*", "id", "ORDER BY ordenation ASC");
+$items = select("menu INNER JOIN mfood ON menu.sub_id_product = mfood.ordenation", 
+                "menu.id AS id, menu.name_product AS name_product, menu.value_product AS value_product, mfood.subalimento AS subalimento, menu.ordenation AS ordenation", 
+                "menu.id", "ORDER BY menu.ordenation ASC", "LIMIT $start_page, $rows");
+$itemsAll = select("menu INNER JOIN mfood ON menu.sub_id_product = mfood.ordenation", "*", "menu.id", "ORDER BY menu.ordenation ASC");
+
 
 $countItems = ($itemsAll ? count($itemsAll) : "0");
 $countPage = $countItems / $rows;
+
 ?>
 
 <!DOCTYPE html>
@@ -86,6 +90,7 @@ $countPage = $countItems / $rows;
             <tr>
               <th>Ordem</th>
               <th>Nome da Comida</th>
+              <th>Categoria</th>
               <th>Valor</th>
               <th class="col-actions">Ações</th>
             </tr>
@@ -97,6 +102,7 @@ $countPage = $countItems / $rows;
               <td><?= $items[$i]['ordenation'] ?></td>
 
               <td><?= $items[$i]['name_product'] ?></td>
+              <td><?= $items[$i]['subalimento'] ?></td>
               <td>R$ <?= number_format($items[$i]['value_product'],2,',','.') ?></td>
 
             <td class="col-actions">

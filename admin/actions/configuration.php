@@ -14,8 +14,8 @@ mb_regex_encoding('UTF8');
 
 if(isset($_POST['action'])) {
 
-  $namePage = "configurations";
-  $object = "configurations";
+  $namePage = "configuracoes";
+  $object = "configuracoes";
 
   // ADD
   if($_POST['action'] == 'add') {

@@ -29,6 +29,8 @@ if($slides) {
   $id = $slides[0]['id'];
   $name = $slides[0]['title'];
   $text = $slides[0]['text'];
+  $images = $slides[0]['namedir'];
+
 }
 
 ?>
@@ -92,6 +94,25 @@ if($slides) {
         <label for="content">Texto*</label>
         <textarea id="summernote" class="form-control" name="text"><?= $text ?></textarea>
       </div>  
+      <div class="w-100">
+            <?php if(!empty($images)) : ?>
+              <div class="form-group col-md-6">
+                <label>Imagem atual*</label>
+                <div class="form-control">
+                  <img class="img-news-edit img-fluid" src="<?=BASE?>require/img/slide/<?= $images ?>" alt="Imagem não encontrado">
+                </div>
+              </div>
+            <?php endif; ?>
+
+              <div class="form-group col-md-6">
+                <label for="file">Nova imagem de promoções</label>
+                <input type="file" class="form-control" id="file" name="file" accept="image/*">
+                <small>
+                  Largura Max.: 5000px / Altura Max.: 3000px.<br/>
+                  A nova imagem irá substituir a imagem atual.
+                </small>
+              </div>
+      </div>
 
       <div class="w-100"></div>
 

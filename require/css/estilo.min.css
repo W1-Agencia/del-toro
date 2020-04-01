@@ -59,7 +59,7 @@ header .navbar .collapse .navbar-nav .nav-item .nav-link:hover{color: #eca607;}
 .menu-variavel .navbar .collapse .navbar-nav{ margin-top: -30px;}
 .menu-variavel .navbar .collapse .navbar-brand{margin-top: 10px; width: 200px;}
 /* corpo site */
-#slide{background-image: url(../../require/img/fundo/slide.png); background-attachment: fixed; background-position: center; background-size: cover; background-repeat: no-repeat;}
+#slide{background-attachment: fixed; background-position: center; background-size: cover; background-repeat: no-repeat;}
 #slide .owl-theme .custom-nav {position: absolute; top: 10%; left: 0; right: 0; z-index: 99; display: block;}
 #slide .owl-theme .custom-nav .owl-prev, #slide .owl-theme .custom-nav .owl-next { position: absolute; height: auto; color: inherit; background: none; border: none; z-index: 99; min-height: 60vh; margin-top: 50px; }
 #slide .owl-theme .custom-nav button:focus,	#slide .owl-theme .custom-nav button:focus{ outline: thin dotted; outline: 0px auto -webkit-focus-ring-color; outline-offset: 0px; }

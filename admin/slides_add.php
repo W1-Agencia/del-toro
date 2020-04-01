@@ -80,6 +80,12 @@ $pageName = "slides";
       </div>  
       <ul class="form-group col-md-12 container-error"></ul>
 
+      <div class="form-group col-md-6">
+        <label for="file">Imagem do slide*</label>
+        <input type="file" class="form-control" id="file" name="file" accept="image/*">
+        <small>(Largura Max.: 5000px / Altura Max.: 3000px)</small>
+      </div>
+
       <div class="col-md-12">
         <hr>
       </div>

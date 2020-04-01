@@ -7,6 +7,7 @@ require_once './require/functions/select.php';
 require_once './require/functions/update.php';
 require_once './require/functions/delete.php';
 require_once './require/functions/ordenation.php';
+require_once "./admin/require/functions/files.php";
 
 setlocale(LC_ALL,'pt_BR.UTF8');
 mb_internal_encoding('UTF8'); 
@@ -17,10 +18,12 @@ if(isset($_POST['action'])) {
   $object = "Slides";
   $namePage = "slides";
   $nameTable = "slide";
+  $imageDiretory = "./admin/require/img/slide/";
 
   if($_POST['action'] == 'add') {
 
     // ORDENATION
+    $img = saveImage($_FILES['file'], $imageDiretory);
     $lastItem = select($nameTable, "*", "id", "ORDER BY ordenation DESC", "LIMIT 1");
     $ordenation = (!$lastItem) ? 1 : $lastItem[0]['ordenation'] + 1;
 
@@ -28,8 +31,8 @@ if(isset($_POST['action'])) {
 
       // INSERT
       $return = insert(
-        array("title", "text",  "ordenation"), 
-        array($_POST['title'], $_POST['text'],  $ordenation),
+        array("title", "text",  "ordenation","namedir"), 
+        array($_POST['title'], $_POST['text'],  $ordenation, $img),
         $nameTable
       );
 
@@ -49,6 +52,8 @@ if(isset($_POST['action'])) {
     $text = $_POST['text'];
     $title = $_POST['title'];
     $ordenation = $_POST['ordenation'];
+    $img = $_FILES['file'];
+
 
     // SELECT ITEMS
     $allItems = select($nameTable, "*", "id");
@@ -64,17 +69,25 @@ if(isset($_POST['action'])) {
     $item['text'] = ($text != $item['text']) ? $text : $item['text'];
     $item['title'] = ($title != $item['title']) ? $title : $item['title'];
 
+    if (isset($img) && !empty($img['name'])) 
+    {
+        $nameImage = saveImage($img, $imageDiretory);
+        unlink($imageDiretory.$item['namedir']);
+        $item['namedir'] = $nameImage;
+    }
     // UPDATE
     $return = update(
       array(
         'text', 
         'title',
-        'ordenation'
+        'ordenation',
+        'namedir'
       ), 
       array(
         $item['text'], 
         $item['title'],
-        $item['ordenation']
+        $item['ordenation'],
+        $item['namedir'],
       ), 
       $nameTable, "id = " . $id
     );
@@ -113,6 +126,8 @@ if(isset($_POST['action'])) {
       }
 
       // IMAGE
+      unlink($imageDiretory . $item[0]['img']);
+
       // DELETE
       delete($nameTable, "id=".$id);
 

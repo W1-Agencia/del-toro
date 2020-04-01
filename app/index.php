@@ -35,12 +35,11 @@
 <body class = "fundo-preto">
     <?php require "components/header.php"; ?>
     <!-- corpo do site -->
-
-      <section id="slide">
+    <?php for($i = 0;$i < count($slides); $i ++) : ?>
+      <section id="slide" style="background-image: url('<?=BASE_IMG_ADMIN?>slide/<?=$slides[$i]['namedir'];?>');" >
           <div class = "container-fluid pt-5 pb-5 text-center slide-img" id = "">
                 <div  class="owl-carousel owl-theme">
-                    <?php for($i = 0;$i < count($slides); $i ++) : ?>
-                    <div class="item">
+                    <div class="item"  >
                         <!-- item de slide -->
                         <div class="row mt-5 pt-5">
                             <div class="col-md mt-5 pt-5 ">
@@ -50,7 +49,6 @@
                             </div><!-- col-md -->
                         </div><!-- row -->
                     </div><!-- item -->
-                    <?php endfor;?>
                 </div><!-- owl-carousel -->
                 <div class="owl-theme"><div class="owl-controls"><div class="custom-nav owl-nav"></div></div>
 
@@ -61,6 +59,7 @@
             </div><!-- row -->
         </div><!-- container -->
       </section><!-- slider -->
+      <?php endfor;?>
 
       <section id="cardapios" class = "pt-5 pb-5">
         <div class = "container pt-5 pb-5 mb-5 mt-5 text-center">

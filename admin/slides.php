@@ -89,6 +89,7 @@ $countPage = $countItems / $rows;
               <th>Ordem</th>
               <th>Titulo</th>
               <th>Texto</th>
+              <th>Imagem</th>
               <th class="col-actions">Ações</th>
             </tr>
           </thead>
@@ -101,6 +102,8 @@ $countPage = $countItems / $rows;
               <td><?= $items[$i]['title'] ?></td>
 
               <td><?= $items[$i]['text'] ?></td>
+              
+              <td><img class="img-fluid img-table" src="require/img/slide/<?=$items[$i]['namedir']?>" /></td>
 
             <td class="col-actions">
               <form action="<?= BASE ?>slides-editar?<?= $items[$i]['id']?>" method="GET" ></form>
